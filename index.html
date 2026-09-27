@@ -1,0 +1,241 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex, nofollow"><style>:root{color-scheme:light}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Чистилище</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Обложка трёх вариантов. Нейтральная к ним всем: бумага, тушь,
+   логотип шрифтом заказчицы. Тема одна, светлая — по выбору. */
+@font-face{
+  font-family:"Czizh Feather";
+  src:url("hub/czizh-feather-400.woff2") format("woff2");
+  font-display:swap;
+}
+:root{
+  color-scheme:light;
+  --paper:#F1EEE6;
+  --card:#F8F6F0;
+  --ink:#1B1916;
+  --muted:#5B554A;
+  --line:#D6D0C2;
+  --f-brand:"Czizh Feather", "Prata", serif;
+  --f-head:"Prata", "Times New Roman", serif;
+  --f-text:"Golos Text", -apple-system, "Segoe UI", sans-serif;
+  --ease-out:cubic-bezier(.23, 1, .32, 1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-text);
+  font-size:1.0625rem;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+::selection{background:var(--ink);color:var(--paper)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+a,button{-webkit-tap-highlight-color:transparent}
+@media (prefers-reduced-motion: reduce){*{transition-duration:.001ms!important}}
+
+.hub{width:min(1180px, 100% - 2rem);margin-inline:auto;padding-block:clamp(1.4rem, 3vw, 2.4rem) 4rem}
+
+.hub-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:.5rem 2rem;
+  flex-wrap:wrap;
+  padding-bottom:1.2rem;
+  border-bottom:1px solid var(--ink);
+}
+.mark{margin:0;font-family:var(--f-brand);font-size:clamp(2.4rem, 1.4rem + 3vw, 3.8rem);line-height:1;letter-spacing:.02em}
+.stamp{margin:0;font-size:.875rem;color:var(--muted)}
+
+.intro{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1.1fr);
+  gap:1rem clamp(2rem, 5vw, 5rem);
+  align-items:end;
+  padding-block:clamp(2.4rem, 5vw, 4rem) clamp(2rem, 4vw, 3rem);
+}
+.intro h1{
+  margin:0;
+  font-family:var(--f-head);
+  font-weight:400;
+  font-size:clamp(2.4rem, 1.4rem + 3.4vw, 4.4rem);
+  line-height:1.02;
+  text-wrap:balance;
+}
+.intro p{margin:0;max-width:34rem;color:var(--muted)}
+
+.variants{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(1.4rem, 3vw, 2.2rem)}
+.variant{
+  display:grid;
+  grid-template-columns:minmax(0, 1.35fr) minmax(0, 1fr);
+  gap:clamp(1.4rem, 3.4vw, 3rem);
+  align-items:center;
+  padding:clamp(.8rem, 1.6vw, 1.2rem);
+  background:var(--card);
+  border:1px solid var(--line);
+}
+.shot{display:block;overflow:hidden;background:var(--ink)}
+.shot img{aspect-ratio:16 / 10;object-fit:cover;object-position:top;width:100%;transition:transform .5s var(--ease-out)}
+.v-text{display:grid;grid-template-columns:auto minmax(0, 1fr);gap:.2rem 1.2rem;padding-right:clamp(0rem, 2vw, 1.4rem)}
+.v-no{grid-row:1 / 5;font-family:var(--f-head);font-size:clamp(3rem, 2rem + 3vw, 5rem);line-height:.9;color:var(--ink)}
+.v-text h2{margin:0;font-family:var(--f-head);font-weight:400;font-size:clamp(1.7rem, 1.2rem + 1.4vw, 2.4rem);line-height:1.1}
+.basis{margin:0 0 .7rem;font-size:.9375rem;font-weight:500;color:var(--muted)}
+.v-text p.desc{margin:0 0 1.1rem;color:var(--muted);max-width:30rem}
+.open{
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  gap:.8rem;
+  padding:.75rem 1.1rem;
+  background:var(--ink);
+  color:var(--paper);
+  font-size:.9375rem;
+  font-weight:500;
+  text-decoration:none;
+  transition:transform .16s var(--ease-out), background-color .2s ease;
+}
+.open svg{transition:transform .2s var(--ease-out)}
+.open:active{transform:scale(.97)}
+
+.notes{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+  gap:clamp(1.4rem, 3vw, 2.2rem);
+  margin-top:clamp(2.4rem, 5vw, 4rem);
+}
+.note{padding-top:1rem;border-top:1px solid var(--ink)}
+.note h2{margin:0 0 .9rem;font-family:var(--f-head);font-weight:400;font-size:1.6rem;line-height:1.15}
+.note ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.55rem;color:var(--muted)}
+.note ol b{color:var(--ink);font-weight:600}
+.note p{margin:1rem 0 0;color:var(--muted);font-size:.9375rem}
+.dash{padding:.5rem .75rem;border:1px dashed var(--muted);width:fit-content;max-width:100%}
+.cm{
+  margin-top:1.2rem;
+  padding:.65rem 1rem;
+  background:transparent;
+  border:1px solid var(--ink);
+  color:var(--ink);
+  font:inherit;
+  font-size:.9375rem;
+  font-weight:500;
+  cursor:pointer;
+  transition:transform .16s var(--ease-out), background-color .2s ease, color .2s ease;
+}
+.cm:active{transform:scale(.97)}
+
+.foot{margin-top:clamp(3rem, 6vw, 5rem);padding-top:1rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap;font-size:.875rem;color:var(--muted)}
+.foot p{margin:0}
+
+@media (hover:hover) and (pointer:fine){
+  .variant:hover .shot img{transform:scale(1.02)}
+  .open:hover svg{transform:translateX(4px)}
+  .cm:hover{background:var(--ink);color:var(--paper)}
+}
+@media (max-width: 820px){
+  .intro,.variant,.notes{grid-template-columns:1fr}
+  .v-text{padding:0 .2rem .4rem}
+}
+</style>
+
+<main class="hub">
+  <header class="hub-head">
+    <p class="mark">Чистилище</p>
+    <p class="stamp">Сайт актёрского агентства · черновик на обсуждение · 27 сентября 2026</p>
+  </header>
+
+  <section class="intro">
+    <h1>Три варианта сайта</h1>
+    <p>Три разных взгляда на один сайт. Все три рабочие: их можно листать, открывать карточки актёров, отбирать и собирать запрос. Посмотрите каждый и скажите, какой ближе — или что взять из разных.</p>
+  </section>
+
+  <ol class="variants">
+    <li class="variant" data-comment>
+      <a class="shot" href="v1/index.html" aria-label="Открыть вариант 1, «Гербарий»"><img src="hub/v1.webp" alt="Первый экран варианта «Гербарий»" width="1200" height="750"></a>
+      <div class="v-text">
+        <span class="v-no" aria-hidden="true">1</span>
+        <h2>Гербарий</h2>
+        <p class="basis">По первому мудборду — доработанный прототип</p>
+        <p class="desc">Пергамент и сепия, фото в паспарту. Гербарий на полях расцветает по мере прокрутки. Кнопка «Аа» внизу — можно самой переключить шрифты, бумагу и акцент.</p>
+        <a class="open" href="v1/index.html">Открыть вариант 1
+          <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></a>
+      </div>
+    </li>
+    <li class="variant" data-comment>
+      <a class="shot" href="v2/index.html" aria-label="Открыть вариант 2, «Небо»"><img src="hub/v2.webp" alt="Первый экран варианта «Небо»" width="1200" height="750"></a>
+      <div class="v-text">
+        <span class="v-no" aria-hidden="true">2</span>
+        <h2>Небо</h2>
+        <p class="basis">По новому мудборду</p>
+        <p class="desc">Коллаж старой печати: растровое небо рвётся над мхом, актёры — на кабинет-карточках, принципы агентства — на таблице превращения Мериан. Понравившихся можно откладывать «в конверт» и сразу писать запрос.</p>
+        <a class="open" href="v2/index.html">Открыть вариант 2
+          <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></a>
+      </div>
+    </li>
+    <li class="variant" data-comment>
+      <a class="shot" href="v3/index.html" aria-label="Открыть вариант 3, «Крупный план»"><img src="hub/v3.webp" alt="Первый экран варианта «Крупный план»" width="1200" height="750"></a>
+      <div class="v-text">
+        <span class="v-no" aria-hidden="true">3</span>
+        <h2>Крупный план</h2>
+        <p class="basis">Мой вариант — после разбора 18 западных агентств</p>
+        <p class="desc">Лица в масштабе экрана, как у модного дома: чёрно-белые портреты и русская дидона. В указателе наведите на имя — зал темнеет и за списком проступает лицо. Фильтр набран фразой, отобранные копятся в «Отборе».</p>
+        <a class="open" href="v3/index.html">Открыть вариант 3
+          <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></a>
+      </div>
+    </li>
+  </ol>
+
+  <div class="notes">
+    <section class="note" aria-labelledby="howTitle">
+      <h2 id="howTitle">Как оставить комментарий</h2>
+      <ol>
+        <li>Откройте вариант — переключаться между ними можно кнопкой «Вариант» внизу справа.</li>
+        <li id="howCm">Замечания присылайте сообщением — можно со скриншотом.</li>
+      </ol>
+      <p class="dash">Во всех вариантах актёры вымышленные, фото временные, со стока, проекты и контакты — примеры. Всё в пунктирной рамке — заглушка.</p>
+    </section>
+    <section class="note" id="questions" aria-labelledby="qTitle" data-comment>
+      <h2 id="qTitle">Три вопроса к вам</h2>
+      <ol>
+        <li><b>Сколько актёров в агентстве сейчас и сколько планируется?</b> До пятнадцати — хватит витрины. Больше пятидесяти — нужен полноценный каталог с поиском и отдельными страницами.</li>
+        <li><b>Есть ли у актёров профессиональные фотосессии?</b> Сайт держится на портретах. Если снимки разные по свету, заложим единую обработку.</li>
+        <li><b>Кто будет обновлять сайт?</b> Если вы сами — сделаем простую таблицу, из которой сайт берёт актёров.</li>
+      </ol>
+      <button class="cm" id="cmQuestions" type="button" hidden>Ответить комментарием</button>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <p>Чистилище — актёрское агентство</p>
+    <p>Искусство движет людей</p>
+  </footer>
+</main>
+
+<script>
+(function(){
+  "use strict";
+  // Комментарии пишет оболочка claude.ai. Если её нет — остаётся совет написать сообщением.
+  if (!window.claude || typeof window.claude.use !== "function") return;
+  window.claude.use("comments").then(function(ns){
+    if (!ns) return;
+    document.getElementById("howCm").textContent =
+      "Нажмите «Комментировать» внизу справа и кликните по месту, к которому относится замечание — появится окошко для текста.";
+    var btn = document.getElementById("cmQuestions");
+    btn.hidden = false;
+    btn.addEventListener("click", function(){
+      ns.openComposer({ element: document.getElementById("questions") }).then(function(){}, function(){
+        btn.hidden = true;
+      });
+    });
+  }, function(){ /* оболочка не ответила */ });
+})();
+</script>
+
+</body></html>

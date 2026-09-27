@@ -1,0 +1,1587 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Чистилище · Крупный план</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* ============================================================
+   ЧИСТИЛИЩЕ · вариант 3 «Крупный план»
+   Агентство как флагман модного дома: костяной лист, русская
+   дидона, лица в масштабе экрана. Никаких метафор-декораций:
+   высказывание делают портреты и типографика.
+   Один акцент — гранат, только для отбора и активного состояния.
+   ============================================================ */
+:root{
+  color-scheme:light;
+  --bone:     #F2F1ED;
+  --bone-2:   #E8E6E0;
+  --ink:      #121212;
+  --graphite: #56564F;   /* вторичный текст, 6.7:1 на кости */
+  --hair:     #D3D0C8;   /* волосная линия */
+  --garnet:   #7B1E2B;   /* отбор и активное, 9.6:1 на кости */
+
+  --f-display:"Oranienbaum", "Times New Roman", serif;
+  --f-ui:     "Jost", "Helvetica Neue", Arial, sans-serif;
+
+  --ease-out: cubic-bezier(.23, 1, .32, 1);
+  --gutter:   clamp(1rem, 3.2vw, 3rem);
+
+  --rv-bg: var(--bone);
+  --rv-ink: var(--ink);
+  --rv-line: var(--graphite);
+  --rv-accent: var(--garnet);
+  --rv-font: var(--f-ui);
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bone);
+  color:var(--ink);
+  font-family:var(--f-ui);
+  font-weight:400;
+  font-size:1rem;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+body:has(dialog[open]){overflow:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+::selection{background:var(--ink);color:var(--bone)}
+input,textarea{caret-color:var(--garnet)}
+a,button,label{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:1.5px solid var(--garnet);outline-offset:3px}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--bone);padding:.6rem 1rem}
+.skip:focus{left:1rem;top:1rem}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+
+.pad{padding-inline:var(--gutter)}
+.micro{
+  font-family:var(--f-ui);
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.num{font-variant-numeric:tabular-nums lining-nums}
+.flag{
+  width:fit-content;
+  max-width:100%;
+  margin:2rem 0 0;
+  padding:.5rem .75rem;
+  border:1px dashed var(--graphite);
+  color:var(--graphite);
+  font-size:.875rem;
+  line-height:1.45;
+}
+
+/* ---------- текстовая кнопка со стрелкой ---------- */
+.go{
+  display:inline-flex;
+  align-items:center;
+  gap:.9rem;
+  padding:.35rem 0;
+  background:none;
+  border:0;
+  border-bottom:1px solid currentColor;
+  font-family:var(--f-ui);
+  font-size:.8125rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .16s var(--ease-out);
+}
+.go svg{transition:transform .2s var(--ease-out)}
+.go:active{transform:scale(.97)}
+.solid{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.8rem;
+  min-height:3rem;
+  padding:.8rem 1.4rem;
+  background:var(--ink);
+  color:var(--bone);
+  border:1px solid var(--ink);
+  font-family:var(--f-ui);
+  font-size:.8125rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  transition:background-color .2s ease, color .2s ease, border-color .2s ease, transform .16s var(--ease-out);
+}
+.solid:active{transform:scale(.97)}
+.solid.line{background:transparent;color:var(--ink)}
+.solid.picked{background:var(--garnet);border-color:var(--garnet);color:var(--bone)}
+
+/* =============================================================
+   Шапка — волосная линия в одну строку
+   ============================================================= */
+.bar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:1rem;
+  min-height:3.5rem;
+  background:color-mix(in srgb, var(--bone) 94%, transparent);
+  backdrop-filter:saturate(1.2) blur(8px);
+  border-bottom:1px solid var(--hair);
+}
+.bar .mark{
+  justify-self:start;
+  font-family:var(--f-display);
+  font-size:1.35rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+}
+.bar nav{display:flex;gap:clamp(1rem, 2.4vw, 2.4rem)}
+.bar nav a{
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding-block:.4rem;
+  background:linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition:background-size .25s var(--ease-out);
+}
+.pick-open{
+  justify-self:end;
+  display:inline-flex;
+  align-items:baseline;
+  gap:.35rem;
+  padding:.45rem 0;
+  background:none;
+  border:0;
+  cursor:pointer;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.pick-open b{font-weight:500;font-variant-numeric:tabular-nums}
+.pick-open.has b{color:var(--garnet)}
+.pick-open.bump b{display:inline-block;animation:bump .34s var(--ease-out)}
+@keyframes bump{40%{transform:translateY(-3px)}}
+
+/* =============================================================
+   1. Герой — лица во всю ширину, слово садится на край снимка
+   ============================================================= */
+.hero{position:relative;padding-bottom:clamp(4rem, 8vw, 7rem)}
+.strip{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  height:clamp(400px, 64svh, 760px);
+  background:var(--ink);
+}
+.strip a{position:relative;overflow:hidden;display:block;text-decoration:none;color:var(--bone)}
+.strip a::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;background:linear-gradient(to bottom, transparent, rgba(18,18,18,.55));pointer-events:none}
+.strip img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 22%;
+  filter:grayscale(1) contrast(1.08);
+  transition:filter .35s var(--ease-out), transform .6s var(--ease-out);
+}
+.strip .who{
+  position:absolute;
+  left:1rem;
+  bottom:clamp(4.2rem, 8vw, 7.6rem);
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .25s ease, transform .25s var(--ease-out);
+}
+.word-wrap{
+  position:absolute;
+  left:0;
+  right:0;
+  top:clamp(400px, 64svh, 760px);
+  transform:translateY(-50%);
+  display:grid;
+  pointer-events:none;
+}
+.word-wrap .word{grid-area:1 / 1}
+.word{
+  margin:0;
+  font-family:var(--f-display);
+  font-weight:400;
+  font-size:clamp(3.2rem, 16.4vw, 17rem);
+  line-height:1;
+  letter-spacing:-.005em;
+  text-transform:uppercase;
+  text-align:center;
+  white-space:nowrap;
+}
+/* Две копии слова: верхняя половина светлая — на снимках,
+   нижняя тёмная — на кости. Шов ровно по краю фотографий. */
+.word-wrap .ghost{color:var(--bone);clip-path:inset(0 0 50% 0)}
+.word-wrap .solid-word{color:var(--ink);clip-path:inset(50% 0 0 0)}
+.hero-foot{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr);
+  gap:2rem;
+  align-items:start;
+  /* ниже нижней половины слова: она уходит на 8.2vw под край снимков */
+  margin-top:calc(min(8.2vw, 8.5rem) + 1.4rem);
+}
+.hero-foot .left{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem}
+.hero-foot .micro{color:var(--graphite);line-height:1.8}
+.thesis{
+  margin:0 0 1.4rem;
+  font-family:var(--f-display);
+  font-size:clamp(1.7rem, 1rem + 2.2vw, 3rem);
+  line-height:1.08;
+  text-wrap:balance;
+}
+.hero-foot .right{justify-self:end;max-width:36rem}
+.hero-foot .thesis{margin:0}
+
+/* =============================================================
+   2. Актёры — отбор, сетка и указатель
+   ============================================================= */
+.section{padding-block:clamp(4rem, 8vw, 7.5rem);border-top:1px solid var(--hair)}
+.sec-head{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:end;
+  gap:1rem 2rem;
+  margin-bottom:clamp(1.6rem, 3vw, 2.4rem);
+}
+.sec-title{
+  margin:0;
+  font-family:var(--f-display);
+  font-weight:400;
+  font-size:clamp(3rem, 1.6rem + 6vw, 8.5rem);
+  line-height:.9;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+}
+.sec-count{
+  align-self:start;
+  font-family:var(--f-display);
+  font-size:clamp(1.2rem, .8rem + 1.2vw, 2rem);
+  color:var(--graphite);
+}
+.views{justify-self:end;display:flex;gap:1.4rem}
+.views button{
+  padding:.4rem 0;
+  background:none;
+  border:0;
+  border-bottom:1px solid transparent;
+  cursor:pointer;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--graphite);
+  transition:color .2s ease, border-color .2s ease;
+}
+.views button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* Фильтр набран фразой, а не чипами. */
+.phrase{
+  margin:0 0 clamp(2rem, 4vw, 3rem);
+  padding-block:1.1rem;
+  border-block:1px solid var(--hair);
+  font-family:var(--f-display);
+  font-size:clamp(1.35rem, 1rem + 1.1vw, 2rem);
+  line-height:1.5;
+  color:var(--graphite);
+}
+.phrase .opt{
+  padding:0 .1em;
+  background:none;
+  border:0;
+  cursor:pointer;
+  font:inherit;
+  color:var(--graphite);
+  text-decoration:underline;
+  text-decoration-color:transparent;
+  text-underline-offset:.18em;
+  text-decoration-thickness:1px;
+  transition:color .2s ease, text-decoration-color .2s ease;
+}
+.phrase .opt[aria-pressed="true"]{color:var(--ink);text-decoration-color:var(--ink)}
+.phrase .sep{color:var(--hair)}
+.phrase .tally{
+  display:inline-block;
+  margin-left:.4em;
+  font-family:var(--f-ui);
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  vertical-align:middle;
+  color:var(--graphite);
+}
+
+.grid{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:clamp(2rem, 3.4vw, 3.4rem) clamp(.8rem, 1.6vw, 1.6rem);
+}
+.tile{display:flex;flex-direction:column;gap:.7rem;transition:opacity .25s ease, filter .25s ease}
+/* Неподходящие не исчезают, а гаснут: видно, из кого выбирали. */
+.tile.off{opacity:.3;order:1}
+.tile-open{display:block;padding:0;border:0;background:var(--bone-2);cursor:pointer;overflow:hidden;aspect-ratio:3 / 4}
+.tile-open img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:50% 20%;
+  filter:grayscale(1) contrast(1.06);
+  transition:transform .5s var(--ease-out), filter .35s var(--ease-out);
+}
+.tile-open:active img{transform:scale(1.01)}
+.tile-cap{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:.2rem .7rem}
+.tile-cap .code{grid-row:1 / 3;font-size:.75rem;font-weight:500;letter-spacing:.1em;color:var(--graphite);padding-top:.15rem}
+.tile-cap h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:1.3rem;line-height:1.15}
+.tile-cap .meta{grid-column:2;margin:0;font-size:.8125rem;color:var(--graphite)}
+.tile-cap .add{grid-row:1 / 3;grid-column:3}
+.add{
+  display:grid;
+  place-items:center;
+  width:2.4rem;
+  height:2.4rem;
+  padding:0;
+  background:none;
+  border:1px solid var(--hair);
+  border-radius:50%;
+  cursor:pointer;
+  color:var(--ink);
+  transition:background-color .2s ease, border-color .2s ease, color .2s ease, transform .16s var(--ease-out);
+}
+.add:active{transform:scale(.92)}
+.add[aria-pressed="true"]{background:var(--garnet);border-color:var(--garnet);color:var(--bone)}
+.add svg{transition:transform .25s var(--ease-out)}
+.add[aria-pressed="true"] svg{transform:rotate(45deg)}
+
+/* ---------- указатель имён ---------- */
+.index{position:relative;isolation:isolate;margin-inline:calc(-1 * var(--gutter));padding-inline:var(--gutter);transition:background-color .3s ease, color .3s ease}
+.peek{
+  position:sticky;
+  top:3.5rem;
+  height:calc(100svh - 3.5rem);
+  margin-bottom:calc(-100svh + 3.5rem);
+  z-index:0;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.peek img{
+  position:absolute;
+  right:0;
+  top:0;
+  width:min(58%, 56rem);
+  height:100%;
+  object-fit:cover;
+  object-position:50% 18%;
+  filter:grayscale(1) contrast(1.1);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.peek img.on{opacity:1}
+.peek::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg, var(--ink) 0%, var(--ink) 38%, color-mix(in srgb, var(--ink) 30%, transparent) 70%, transparent 100%);
+}
+.index.lit{background:var(--ink);color:var(--bone)}
+.index.lit .peek{opacity:1}
+.names{position:relative;z-index:1;list-style:none;margin:0;padding:0;counter-reset:n}
+.names li{border-bottom:1px solid var(--hair);transition:border-color .3s ease}
+.index.lit .names li{border-color:color-mix(in srgb, var(--bone) 18%, transparent)}
+.name-row{
+  display:grid;
+  grid-template-columns:3.2rem minmax(0, 1fr) auto;
+  align-items:baseline;
+  gap:1rem;
+  width:100%;
+  padding:.35rem 0 .2rem;
+  background:none;
+  border:0;
+  cursor:pointer;
+  text-align:left;
+  color:inherit;
+  transition:color .25s ease, opacity .25s ease;
+}
+.name-row .code{font-size:.75rem;font-weight:500;letter-spacing:.1em;color:inherit;opacity:.6}
+.name-row .nm{font-family:var(--f-display);font-size:clamp(2.2rem, 1rem + 4.4vw, 5.6rem);line-height:1.02;letter-spacing:-.01em}
+.name-row .age{font-size:.8125rem;letter-spacing:.06em;opacity:.7;white-space:nowrap}
+.index.lit .name-row{opacity:.4}
+.index.lit .name-row.cur{opacity:1}
+.index.lit .name-row:not(.cur) .age{visibility:hidden}
+.index.lit .name-row.cur .age{opacity:1;color:var(--bone)}
+.names li.off .name-row{opacity:.18}
+.index .thumb{display:none}
+
+/* =============================================================
+   3. Агентство — линейка
+   ============================================================= */
+.agency-lead{
+  display:grid;
+  grid-template-columns:minmax(0, 1.4fr) minmax(0, 1fr);
+  gap:clamp(2rem, 5vw, 5rem);
+  align-items:end;
+  margin-bottom:clamp(3rem, 6vw, 5rem);
+}
+.statement{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:clamp(2rem, 1rem + 3.2vw, 4.2rem);
+  line-height:1.04;
+  text-wrap:balance;
+}
+.lead-text{max-width:30rem;color:var(--graphite);font-weight:300;font-size:1.0625rem}
+.lead-text p{margin:0 0 1rem}
+.ruler{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.ruler li{
+  display:grid;
+  grid-template-columns:4rem minmax(10rem, .8fr) minmax(0, 1.6fr);
+  gap:1rem 2rem;
+  align-items:baseline;
+  padding:1.3rem 0;
+  border-bottom:1px solid var(--hair);
+}
+.ruler .code{font-size:.75rem;font-weight:500;letter-spacing:.14em;color:var(--graphite)}
+.ruler h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem, 1rem + 1.4vw, 2.4rem);line-height:1}
+.ruler p{margin:0;color:var(--graphite);font-weight:300;max-width:38rem}
+.quote-band{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+  gap:clamp(2rem, 5vw, 5rem);
+  align-items:center;
+  margin-top:clamp(4rem, 8vw, 7rem);
+}
+.quote-band blockquote{
+  margin:0;
+  font-family:var(--f-display);
+  font-size:clamp(2.4rem, 1rem + 4.4vw, 5.8rem);
+  line-height:.98;
+  text-transform:uppercase;
+  letter-spacing:-.01em;
+}
+.for-actors{max-width:30rem}
+.for-actors h3{margin:0 0 .8rem;font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.for-actors p{margin:0 0 1.4rem;color:var(--graphite);font-weight:300}
+
+/* =============================================================
+   4. Проекты — таблица
+   ============================================================= */
+.works{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.works li{
+  display:grid;
+  grid-template-columns:5rem minmax(0, 1.3fr) minmax(0, .8fr) minmax(0, 1.4fr) 6.5rem;
+  gap:1rem 2rem;
+  align-items:center;
+  padding:1.2rem 0;
+  border-bottom:1px solid var(--hair);
+}
+.works .yr{font-family:var(--f-display);font-size:1.4rem;color:var(--graphite)}
+.works h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem, 1rem + 1.6vw, 2.6rem);line-height:1}
+.works .fmt{font-size:.75rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
+.works p{margin:0;color:var(--graphite);font-weight:300;font-size:.9375rem}
+.works img{width:100%;aspect-ratio:4 / 5;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+
+/* =============================================================
+   5. Контакты
+   ============================================================= */
+.contact-grid{display:grid;grid-template-columns:minmax(0, 1.1fr) minmax(0, .9fr);gap:clamp(2.5rem, 6vw, 6rem);align-items:start}
+.big-line{display:flex;flex-direction:column;gap:.4rem;margin:0 0 1.6rem}
+.big-line dt{font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
+.big-line dd{margin:0;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.big-line .val{font-family:var(--f-display);font-size:clamp(1.8rem, 1rem + 2.6vw, 3.6rem);line-height:1.05;user-select:all;overflow-wrap:anywhere}
+.copy{
+  padding:.3rem 0;
+  background:none;
+  border:0;
+  border-bottom:1px solid var(--hair);
+  cursor:pointer;
+  font-size:.75rem;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--graphite);
+  transition:color .2s ease, border-color .2s ease;
+}
+.request{display:flex;flex-direction:column;gap:1.3rem}
+.request h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:2rem;line-height:1}
+.request .picked-line{margin:0;font-size:.9375rem;color:var(--graphite)}
+.request .picked-line b{font-weight:500;color:var(--ink)}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field span{font-size:.75rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
+.field input,.field textarea{
+  width:100%;
+  padding:.55rem 0;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid var(--graphite);
+  border-radius:0;
+  color:var(--ink);
+  font:inherit;
+  font-size:1rem;
+}
+.field textarea{resize:vertical;min-height:5.4rem;line-height:1.5}
+.field input:focus,.field textarea:focus{outline:0;border-bottom:2px solid var(--garnet);margin-bottom:-1px}
+.field input::placeholder,.field textarea::placeholder{color:#8B8A83}
+.form-err{margin:0;color:var(--garnet);font-size:.9375rem}
+.form-ok{margin:0;padding:.9rem 1rem;border:1px solid var(--hair);background:var(--bone-2);font-size:.9375rem}
+.form-ok::before{content:"";display:inline-block;width:.9rem;height:1px;margin:0 .6rem .25rem 0;background:var(--garnet);vertical-align:middle}
+.note{margin:0;font-size:.8125rem;color:var(--graphite)}
+
+/* =============================================================
+   Подвал — слово во всю ширину
+   ============================================================= */
+.foot{border-top:1px solid var(--ink);padding-top:1.4rem;overflow:hidden}
+.foot-row{display:flex;justify-content:space-between;gap:1rem 2rem;flex-wrap:wrap}
+.foot-row p{margin:0}
+.foot-word{
+  margin:clamp(2rem, 5vw, 4rem) 0 0;
+  font-family:var(--f-display);
+  font-size:16.8vw;
+  line-height:.74;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+  text-align:center;
+  white-space:nowrap;
+  transform:translateY(8%);
+}
+
+/* =============================================================
+   Карточка актёра — на весь экран
+   ============================================================= */
+.card{
+  width:100vw;
+  height:100dvh;
+  max-width:none;
+  max-height:none;
+  margin:0;
+  padding:0;
+  border:0;
+  background:var(--bone);
+  color:var(--ink);
+  overflow:hidden;
+}
+.card::backdrop{background:var(--ink)}
+.card[open]{animation:card-in .34s var(--ease-out)}
+@keyframes card-in{from{opacity:0}}
+.card-inner{display:grid;grid-template-columns:minmax(0, 1.05fr) minmax(0, 1fr);height:100%}
+.card-photo{position:relative;background:var(--ink);overflow:hidden}
+.card-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 18%;filter:grayscale(1) contrast(1.08)}
+.card[open] .card-photo img{animation:settle .9s var(--ease-out)}
+@keyframes settle{from{transform:scale(1.04)}}
+.card-photo .temp{position:absolute;left:1rem;bottom:1rem;padding:.35rem .6rem;background:var(--bone);border:1px dashed var(--graphite);font-size:.8125rem;color:var(--graphite)}
+.card-body{display:flex;flex-direction:column;gap:1.3rem;padding:1.2rem clamp(1.2rem, 3.4vw, 3.4rem) 1.6rem;overflow:auto;overscroll-behavior:contain}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.card-top .step{display:flex;gap:.4rem}
+.ctl{
+  display:grid;
+  place-items:center;
+  width:2.6rem;
+  height:2.6rem;
+  padding:0;
+  background:none;
+  border:1px solid var(--hair);
+  cursor:pointer;
+  transition:background-color .2s ease, color .2s ease, border-color .2s ease, transform .16s var(--ease-out);
+}
+.ctl:active{transform:scale(.94)}
+.card-body .code{font-size:.75rem;font-weight:500;letter-spacing:.16em;color:var(--graphite)}
+.card-body h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(2.6rem, 1.4rem + 3.6vw, 5.4rem);line-height:.95;letter-spacing:-.01em}
+.live{margin:0;display:flex;align-items:center;gap:.6rem;font-size:.875rem;color:var(--graphite)}
+.live i{width:.9rem;height:1px;background:var(--garnet)}
+.figs{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));border-block:1px solid var(--ink)}
+.figs div{padding:.9rem 0 .8rem;border-right:1px solid var(--hair)}
+.figs div + div{padding-left:1rem}
+.figs div:last-child{border-right:0}
+.figs b{display:block;font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem, 1.2rem + 2.6vw, 3.8rem);line-height:1;font-variant-numeric:lining-nums tabular-nums}
+.figs span{font-size:.6875rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
+.facts{display:grid;grid-template-columns:7.5rem minmax(0, 1fr);gap:.5rem 1.2rem;margin:0}
+.facts dt{font-size:.6875rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite);padding-top:.25rem}
+.facts dd{margin:0;font-weight:300}
+.facts ul{margin:0;padding:0;list-style:none}
+.card-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:auto;padding-top:.4rem}
+.card-cm{padding:.3rem 0;background:none;border:0;border-bottom:1px dashed var(--graphite);color:var(--graphite);font-size:.8125rem;cursor:pointer}
+
+/* =============================================================
+   Отбор — панель справа
+   ============================================================= */
+.shortlist{
+  width:min(30rem, 100vw);
+  height:100dvh;
+  max-height:none;
+  margin:0 0 0 auto;
+  padding:0;
+  border:0;
+  border-left:1px solid var(--ink);
+  background:var(--bone);
+  color:var(--ink);
+}
+.shortlist::backdrop{background:rgba(18,18,18,.4)}
+.shortlist[open]{animation:slide .36s cubic-bezier(.32, .72, 0, 1)}
+@keyframes slide{from{transform:translateX(100%)}}
+.sl-inner{display:flex;flex-direction:column;height:100%;padding:1.2rem 1.6rem 1.6rem;gap:1.2rem}
+.sl-top{display:flex;justify-content:space-between;align-items:center}
+.sl-top h2{margin:0;font-family:var(--f-display);font-weight:400;font-size:2.6rem;line-height:1}
+.sl-top h2 b{font-weight:400;color:var(--garnet)}
+.sl-empty{margin:0;color:var(--graphite);font-weight:300}
+.sl-list{list-style:none;margin:0;padding:0;overflow:auto;flex:1;border-top:1px solid var(--hair)}
+.sl-list li{display:grid;grid-template-columns:3.4rem minmax(0, 1fr) auto;gap:.9rem;align-items:center;padding:.7rem 0;border-bottom:1px solid var(--hair)}
+.sl-list img{width:3.4rem;aspect-ratio:3 / 4;object-fit:cover;filter:grayscale(1)}
+.sl-list .nm{font-family:var(--f-display);font-size:1.35rem;line-height:1.1}
+.sl-list small{display:block;font-size:.8125rem;color:var(--graphite)}
+.sl-list button{padding:.3rem 0;background:none;border:0;border-bottom:1px solid var(--hair);cursor:pointer;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.sl-actions{display:flex;flex-direction:column;gap:.6rem}
+
+/* ---------- наведение: только там, где есть мышь ---------- */
+@media (hover:hover) and (pointer:fine){
+  .bar nav a:hover{background-size:100% 1px}
+  .go:hover svg{transform:translateX(5px)}
+  .solid:hover{background:transparent;color:var(--ink)}
+  .solid.line:hover{background:var(--ink);color:var(--bone)}
+  .solid.picked:hover{background:var(--ink);border-color:var(--ink);color:var(--bone)}
+  .strip:hover img{filter:grayscale(1) contrast(1.08) brightness(.55)}
+  .strip a:hover img{filter:grayscale(1) contrast(1.08) brightness(1);transform:scale(1.03)}
+  .strip a:hover .who{opacity:1;transform:none}
+  .tile-open:hover img{transform:scale(1.035);filter:grayscale(.15) contrast(1.02)}
+  .add:hover{border-color:var(--ink)}
+  .views button:hover,.phrase .opt:hover{color:var(--ink)}
+  .copy:hover{color:var(--ink);border-color:var(--ink)}
+  .ctl:hover{background:var(--ink);color:var(--bone);border-color:var(--ink)}
+  .sl-list button:hover,.card-cm:hover{color:var(--ink)}
+}
+
+/* =============================================================
+   Адаптив
+   ============================================================= */
+@media (max-width: 1000px){
+  .grid{grid-template-columns:repeat(3, minmax(0, 1fr))}
+  .works li{grid-template-columns:4rem minmax(0, 1fr) 5rem;grid-template-areas:"yr t img" "yr f img" "yr p img"}
+  .works .yr{grid-area:yr}
+  .works h3{grid-area:t}
+  .works .fmt{grid-area:f}
+  .works p{grid-area:p}
+  .works img{grid-area:img}
+}
+@media (max-width: 760px){
+  .bar{grid-template-columns:1fr auto;padding-block:.2rem}
+  .bar nav{grid-column:1 / -1;grid-row:2;order:3;justify-content:space-between;gap:.6rem;padding-bottom:.5rem;overflow-x:auto;scrollbar-width:none}
+  .bar nav::-webkit-scrollbar{display:none}
+  .bar nav a{white-space:nowrap;font-size:.6875rem;letter-spacing:.12em}
+  .strip{grid-template-columns:repeat(3, 1fr);height:clamp(340px, 56svh, 520px)}
+  .strip a:nth-child(n+4){display:none}
+  .word-wrap{top:clamp(340px, 56svh, 520px)}
+  .word{font-size:18.2vw}
+  .hero-foot{grid-template-columns:1fr;margin-top:calc(9.2vw + 1.4rem);gap:1.6rem}
+  .hero-foot .right{order:-1}
+  .hero-foot .right{justify-self:start}
+  .sec-head{grid-template-columns:1fr auto;grid-template-rows:auto auto}
+  .views{grid-column:1 / -1;justify-self:start}
+  .grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+  .tile-cap{grid-template-columns:1fr auto}
+  .tile-cap .code{display:none}
+  .tile-cap h3{font-size:1.1rem}
+  .tile-cap .meta{grid-column:1}
+  .tile-cap .add{grid-column:2}
+  .name-row{grid-template-columns:3rem minmax(0, 1fr);gap:.8rem;padding:.6rem 0}
+  .name-row .code{display:none}
+  .name-row .age{grid-column:2}
+  .index .thumb{display:block;width:3rem;aspect-ratio:3 / 4;object-fit:cover;filter:grayscale(1)}
+  .peek{display:none}
+  .agency-lead,.quote-band,.contact-grid{grid-template-columns:1fr}
+  .works li{grid-template-columns:minmax(0, 1fr) 5.5rem;grid-template-areas:"yr img" "t img" "f img" "p p";align-items:start;gap:.3rem 1rem}
+  .works .yr{font-size:1.1rem}
+  .ruler li{grid-template-columns:2.4rem minmax(0, 1fr);grid-template-areas:"c h" "c p"}
+  .ruler .code{grid-area:c}
+  .ruler h3{grid-area:h}
+  .ruler p{grid-area:p}
+  .card-inner{grid-template-columns:1fr;grid-template-rows:46svh auto;overflow:auto;height:100%}
+  .card{overflow:auto}
+  .card-body{overflow:visible}
+  .figs b{font-size:2.2rem}
+  /* место под док отзыва: последняя строка не прячется под ним */
+  .foot{padding-bottom:3.2rem}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#actors">Перейти к актёрам</a>
+
+<header class="bar pad">
+  <a class="mark" href="#top">Чистилище</a>
+  <nav aria-label="Разделы">
+    <a href="#actors" data-g="f">Актрисы</a>
+    <a href="#actors" data-g="m">Актёры</a>
+    <a href="#agency">Агентство</a>
+    <a href="#works">Проекты</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+  <button class="pick-open" id="pickOpen" type="button" aria-haspopup="dialog">Отбор <b data-count>0</b></button>
+</header>
+
+<main id="top">
+  <!-- ===================== 1. ГЕРОЙ ===================== -->
+  <section class="hero" aria-label="Чистилище, актёрское агентство" data-comment>
+    <div class="strip" id="strip"></div>
+    <div class="word-wrap" aria-hidden="true">
+      <p class="word ghost">Чистилище</p>
+      <p class="word solid-word">Чистилище</p>
+    </div>
+    <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Чистилище — актёрское агентство</h1>
+    <div class="hero-foot pad">
+      <div class="left">
+        <p class="micro" style="margin:0">Актёрское агентство</p>
+        <a class="go" href="#actors">Смотреть актёров
+          <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></a>
+        <p class="flag" style="margin:0">Фото временные, со стока</p>
+      </div>
+      <div class="right">
+        <p class="thesis">Между тем, кем ты был, и тем, кем станешь</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. АКТЁРЫ ===================== -->
+  <section class="section pad" id="actors" aria-labelledby="actorsTitle">
+    <div class="sec-head">
+      <h2 class="sec-title" id="actorsTitle">Актёры</h2>
+      <span class="sec-count num" id="total">12</span>
+      <div class="views" role="group" aria-label="Вид">
+        <button type="button" data-view="grid" aria-pressed="true">Сетка</button>
+        <button type="button" data-view="index" aria-pressed="false">Указатель</button>
+      </div>
+    </div>
+
+    <p class="phrase" id="phrase" data-comment>
+      Показать
+      <button class="opt" type="button" data-f="g" data-v="all" aria-pressed="true">всех</button><span class="sep"> / </span><button class="opt" type="button" data-f="g" data-v="f" aria-pressed="false">актрис</button><span class="sep"> / </span><button class="opt" type="button" data-f="g" data-v="m" aria-pressed="false">актёров</button>,
+      играющих
+      <button class="opt" type="button" data-f="a" data-v="all" aria-pressed="true">любой возраст</button><span class="sep"> / </span><button class="opt" type="button" data-f="a" data-v="young" aria-pressed="false">до 25</button><span class="sep"> / </span><button class="opt" type="button" data-f="a" data-v="mid" aria-pressed="false">25–40</button><span class="sep"> / </span><button class="opt" type="button" data-f="a" data-v="old" aria-pressed="false">старше 40</button>
+      <span class="tally num" id="tally" aria-live="polite">совпадают 12 из 12</span>
+    </p>
+
+    <ul class="grid" id="grid"></ul>
+
+    <div class="index" id="index" hidden>
+      <div class="peek" id="peek" aria-hidden="true"></div>
+      <ol class="names" id="names"></ol>
+    </div>
+
+    <p class="flag">Актёры вымышленные: имена, параметры, фильмография и занятость — для примера. Фото временные, со стока (Unsplash) — сюда встанут настоящие</p>
+  </section>
+
+  <!-- ===================== 3. АГЕНТСТВО ===================== -->
+  <section class="section pad" id="agency" aria-labelledby="agencyTitle">
+    <div class="sec-head">
+      <h2 class="sec-title" id="agencyTitle">Агентство</h2>
+    </div>
+    <div class="agency-lead">
+      <p class="statement">Мы — пространство для тех, кто находится в движении.</p>
+      <div class="lead-text">
+        <p>Мы помогаем актёрам проходить свой путь — очищать, искать, расти и находить новые смыслы.</p>
+        <p>Мы верим в развитие, в новые истории и в силу перемен.</p>
+      </div>
+    </div>
+    <ol class="ruler" data-comment>
+      <li><span class="code">01</span><h3>Очищать</h3><p>Убираем лишнее: чужие ожидания, случайные роли, штампы, которые мешают увидеть артиста.</p></li>
+      <li><span class="code">02</span><h3>Искать</h3><p>Ведём базу проектов и держим связь с кастинг-директорами площадок, а не ждём общей рассылки.</p></li>
+      <li><span class="code">03</span><h3>Расти</h3><p>Самопробы, речь, пластика, работа с камерой — и честный разбор каждой пробы, даже непройденной.</p></li>
+    </ol>
+    <div class="quote-band">
+      <blockquote>Талант требует пространства</blockquote>
+      <div class="for-actors">
+        <p>В каждом человеке есть больше, чем кажется. Актёрам, которые хотят к нам: пришлите три снимка без ретуши, шоурил до двух минут и пару слов о себе — ответим каждому.</p>
+        <a class="go" href="#contacts">Написать агентству
+          <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></a>
+      </div>
+    </div>
+    <p class="flag">Описания принципов и условия для актёров — черновик, перепишем вашими словами. Остальные фразы — с мудборда</p>
+  </section>
+
+  <!-- ===================== 4. ПРОЕКТЫ ===================== -->
+  <section class="section pad" id="works" aria-labelledby="worksTitle">
+    <div class="sec-head">
+      <h2 class="sec-title" id="worksTitle">Проекты</h2>
+    </div>
+    <ol class="works">
+      <li><span class="yr num">2026</span><h3>Вне времени</h3><span class="fmt">Полный метр</span><p>Главная женская роль — Дарья Смирнова. Ещё четверо актёров агентства в составе.</p><img src="img/proj2.webp" alt="" width="900" height="1200" loading="lazy"></li>
+      <li><span class="yr num">2025</span><h3>Грани</h3><span class="fmt">Сериал, 8 серий</span><p>Режиссёр А. Долин. Иван Соколов и Дарья Смирнова — в основном составе.</p><img src="img/proj1.webp" alt="" width="900" height="1200" loading="lazy"></li>
+      <li><span class="yr num">2025</span><h3>Тишина</h3><span class="fmt">Короткий метр</span><p>Конкурсная программа фестиваля «Короче». Полностью наш каст.</p><img src="img/proj3.webp" alt="" width="900" height="1200" loading="lazy"></li>
+    </ol>
+    <p class="flag">Проекты вымышленные — заменим на реальную фильмографию</p>
+  </section>
+
+  <!-- ===================== 5. КОНТАКТЫ ===================== -->
+  <section class="section pad" id="contacts" aria-labelledby="contactsTitle">
+    <div class="sec-head">
+      <h2 class="sec-title" id="contactsTitle">Контакты</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <p class="lead-text" style="margin:0 0 2.4rem">Мы всегда открыты к новым историям, проектам и встречам.</p>
+        <dl>
+          <div class="big-line"><dt>Почта</dt><dd><span class="val" id="mail">hello@chistilishe.agency</span><button class="copy" type="button" data-copy="mail">Скопировать</button></dd></div>
+          <div class="big-line"><dt>Телефон</dt><dd><span class="val num" id="phone">+7 900 000 00 00</span><button class="copy" type="button" data-copy="phone">Скопировать</button></dd></div>
+          <div class="big-line"><dt>Телеграм</dt><dd><span class="val">@chistilishe</span></dd></div>
+        </dl>
+        <p class="flag">Почта, телефон и телеграм — заглушки. Нужны настоящие</p>
+      </div>
+      <form class="request" id="request" novalidate data-comment>
+        <h3>Запрос на актёров</h3>
+        <p class="picked-line" id="pickedLine"></p>
+        <label class="field"><span>Проект</span><input id="fProject" autocomplete="off" placeholder="Название, формат, площадка" required></label>
+        <label class="field"><span>Кого ищете</span><textarea id="fBrief" placeholder="Роль, возраст, типаж, смены, даты" required></textarea></label>
+        <label class="field"><span>Как с вами связаться</span><input id="fContact" autocomplete="email" placeholder="Почта или телеграм" required></label>
+        <p class="form-err" id="formErr" role="alert" hidden></p>
+        <div><button class="solid" type="submit">Отправить запрос
+          <svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></button></div>
+        <p class="note">В прототипе запрос никуда не уходит — подключим на этапе запуска.</p>
+        <p class="form-ok" id="formOk" role="status" hidden>Запрос собран. На живом сайте он придёт агентству, а вам — копия на указанный адрес.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot pad">
+  <div class="foot-row">
+    <p class="micro">Искусство движет людей</p>
+    <p class="micro">Вариант 3 · черновик для обсуждения</p>
+  </div>
+  <p class="foot-word" aria-hidden="true">Чистилище</p>
+</footer>
+
+<dialog class="card" id="card" aria-labelledby="cardName"></dialog>
+
+<dialog class="shortlist" id="shortlist" aria-labelledby="slTitle">
+  <div class="sl-inner">
+    <div class="sl-top">
+      <h2 id="slTitle">Отбор <b class="num" data-count>0</b></h2>
+      <button class="ctl" type="button" data-close aria-label="Закрыть отбор">
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+    </div>
+    <p class="sl-empty" id="slEmpty">Пока никого. Нажмите «+» у портрета или «В отбор» в карточке актёра.</p>
+    <ul class="sl-list" id="slList"></ul>
+    <div class="sl-actions">
+      <button class="solid" type="button" id="slRequest">Запросить отобранных</button>
+      <button class="solid line" type="button" id="slCopy">Скопировать список</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- =============================================================
+     РЕЖИМ ОТЗЫВА — общий для вариантов 2 и 3.
+     Временный слой для заказчицы: записка «как смотреть»,
+     переключатель вариантов и выбор места для комментария.
+     Сами комментарии рисует claude.ai. При запуске сайта слой
+     удаляется целиком. Сборка подставляет 3, «Крупный план», <li>Это третий вариант — на мой вкус, после разбора западных агентств: лица крупно, как у модных домов.</li>
+    <li>Наведите на имя в указателе — лицо актёра заполнит экран. Отбирайте актёров в «Отбор» справа сверху.</li>
+    <li>Всё в пунктирной рамке — заглушки: актёры вымышленные, фото со стока, проекты и контакты — примеры.</li>.
+     Цвета берёт из токенов страницы: --rv-bg, --rv-ink, --rv-line,
+     --rv-accent, --rv-font.
+     ============================================================= -->
+<style>
+.rv-menu:not(:popover-open){display:none}
+.rv-dock[hidden],.rv-note[hidden],.rv-bar[hidden],.rv-ring[hidden],.rv-toast[hidden],.rv-btn[hidden]{display:none!important}
+.rv-dock{
+  position:fixed;
+  right:max(.75rem, env(safe-area-inset-right, 0px));
+  bottom:max(.75rem, env(safe-area-inset-bottom, 0px));
+  z-index:60;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:.4rem;
+  font-family:var(--rv-font, system-ui, sans-serif);
+}
+.rv-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:2.4rem;
+  padding:.5rem .8rem;
+  background:var(--rv-bg, #fff);
+  color:var(--rv-ink, #111);
+  border:1px solid var(--rv-line, #888);
+  font:inherit;
+  font-size:.8125rem;
+  letter-spacing:.02em;
+  line-height:1;
+  text-decoration:none;
+  cursor:pointer;
+  box-shadow:0 2px 12px rgba(0,0,0,.14);
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .2s ease, color .2s ease, transform .16s cubic-bezier(.23,1,.32,1);
+}
+.rv-btn:active{transform:scale(.97)}
+/* На телефоне док не закрывает первый экран: появляется после прокрутки. */
+.rv-dock{transition:opacity .2s ease, transform .2s cubic-bezier(.23,1,.32,1)}
+.rv-dock.rv-away{opacity:0;transform:translateY(8px);pointer-events:none}
+.rv-btn:focus-visible,.rv-note button:focus-visible,.rv-bar button:focus-visible{outline:2px solid var(--rv-accent, #333);outline-offset:2px}
+/* Меню вариантов: одна кнопка вместо ряда — на телефоне ряд не помещался
+   рядом с конвертом и кнопкой комментария. */
+.rv-menu{
+  position:fixed;
+  inset:auto max(.75rem, env(safe-area-inset-right, 0px)) 3.7rem auto;
+  margin:0;
+  padding:.35rem;
+  min-width:15rem;
+  background:var(--rv-bg, #fff);
+  color:var(--rv-ink, #111);
+  border:1px solid var(--rv-line, #888);
+  box-shadow:0 14px 40px rgba(0,0,0,.24);
+  font-family:var(--rv-font, system-ui, sans-serif);
+}
+.rv-menu:popover-open{animation:rv-in .18s cubic-bezier(.23,1,.32,1)}
+@keyframes rv-in{from{opacity:0;transform:translateY(6px)}}
+.rv-menu a{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.65rem .75rem;
+  color:inherit;
+  text-decoration:none;
+  font-size:.9rem;
+}
+.rv-menu a span{opacity:.7;font-size:.8125rem}
+.rv-menu a[aria-current="page"]{background:var(--rv-ink, #111);color:var(--rv-bg, #fff)}
+.rv-menu hr{border:0;border-top:1px solid var(--rv-line, #888);margin:.3rem .4rem;opacity:.5}
+.rv-menu a:focus-visible{outline:2px solid var(--rv-accent, #333);outline-offset:-2px}
+@media (hover:hover) and (pointer:fine){
+  .rv-btn:hover{background:var(--rv-ink, #111);color:var(--rv-bg, #fff)}
+  .rv-menu a:not([aria-current="page"]):hover{background:color-mix(in srgb, var(--rv-ink, #111) 8%, transparent)}
+}
+
+.rv-note{
+  position:fixed;
+  right:max(.75rem, env(safe-area-inset-right, 0px));
+  bottom:4.1rem;
+  z-index:60;
+  width:min(23rem, calc(100vw - 1.5rem));
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+  padding:1.1rem 1.2rem 1.2rem;
+  background:var(--rv-bg, #fff);
+  color:var(--rv-ink, #111);
+  border:1px solid var(--rv-line, #888);
+  box-shadow:0 12px 40px rgba(0,0,0,.22);
+  font-family:var(--rv-font, system-ui, sans-serif);
+  transition:opacity .25s ease, transform .25s cubic-bezier(.23,1,.32,1);
+}
+@starting-style{ .rv-note{opacity:0;transform:translateY(8px)} }
+.rv-note h2{margin:0;font:inherit;font-size:1rem;font-weight:600;letter-spacing:.01em}
+.rv-note ol{margin:0;padding-left:1.1rem;display:flex;flex-direction:column;gap:.4rem;font-size:.875rem;line-height:1.45}
+.rv-note button{
+  align-self:flex-start;
+  padding:.55rem 1rem;
+  background:transparent;
+  color:inherit;
+  border:1px solid currentColor;
+  font:inherit;
+  font-size:.8125rem;
+  cursor:pointer;
+}
+
+.rv-bar{
+  position:fixed;
+  left:50%;
+  top:max(.75rem, env(safe-area-inset-top, 0px));
+  transform:translateX(-50%);
+  z-index:61;
+  display:flex;
+  align-items:center;
+  gap:.9rem;
+  width:max-content;
+  max-width:calc(100vw - 1.5rem);
+  padding:.5rem .5rem .5rem .9rem;
+  background:var(--rv-ink, #111);
+  color:var(--rv-bg, #fff);
+  font-family:var(--rv-font, system-ui, sans-serif);
+  font-size:.8125rem;
+  line-height:1.35;
+  box-shadow:0 8px 30px rgba(0,0,0,.28);
+}
+.rv-bar button{flex:none;padding:.4rem .7rem;background:transparent;color:inherit;border:1px solid currentColor;font:inherit;cursor:pointer}
+.rv-ring{
+  position:fixed;
+  left:0;
+  top:0;
+  z-index:59;
+  pointer-events:none;
+  border:1.5px dashed var(--rv-accent, #333);
+  background:color-mix(in srgb, var(--rv-accent, #333) 10%, transparent);
+}
+html.rv-picking, html.rv-picking *{cursor:crosshair!important}
+html.rv-picking .rv-bar button, html.rv-picking .rv-dock *{cursor:pointer!important}
+
+.rv-toast{
+  position:fixed;
+  left:50%;
+  bottom:4.3rem;
+  z-index:62;
+  max-width:calc(100vw - 2rem);
+  transform:translateX(-50%);
+  padding:.75rem 1.1rem;
+  background:var(--rv-ink, #111);
+  color:var(--rv-bg, #fff);
+  font-family:var(--rv-font, system-ui, sans-serif);
+  font-size:.8125rem;
+  transition:opacity .2s ease, transform .2s cubic-bezier(.23,1,.32,1);
+}
+@starting-style{ .rv-toast{opacity:0;transform:translate(-50%, 8px)} }
+
+@media (max-width:720px){
+  .rv-long{display:none}
+  .rv-btn{min-height:2.2rem;padding:.4rem .6rem}
+}
+@media (max-width:520px){
+  .rv-note{left:.75rem;right:.75rem;width:auto;bottom:6.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv-note,.rv-toast,.rv-btn{transition:none}
+}
+</style>
+
+<div class="rv-dock" id="rvDock" data-uncommentable>
+  <button class="rv-btn" type="button" popovertarget="rvMenu" aria-label="Варианты сайта: сейчас 3 из 3"><span class="rv-long">Вариант&nbsp;</span>3&nbsp;из&nbsp;3</button>
+  <button class="rv-btn" id="rvCm" type="button" hidden>Комментировать</button>
+</div>
+
+<nav class="rv-menu" id="rvMenu" popover aria-label="Варианты сайта" data-uncommentable>
+  <a href="../index.html">Все варианты <span>обложка</span></a>
+  <hr>
+  <a href="../v1/index.html">1 · Гербарий <span>доработанный</span></a>
+  <a href="../v2/index.html">2 · Небо <span>по мудборду</span></a>
+  <a href="../v3/index.html" aria-current="page">3 · Крупный план <span>на мой вкус</span></a>
+</nav>
+
+<aside class="rv-note" id="rvNote" hidden data-uncommentable aria-labelledby="rvNoteTitle">
+  <h2 id="rvNoteTitle">Вариант 3 из 3 · «Крупный план»</h2>
+  <ol>
+    <li>Это третий вариант — на мой вкус, после разбора западных агентств: лица крупно, как у модных домов.</li>
+    <li>Наведите на имя в указателе — лицо актёра заполнит экран. Отбирайте актёров в «Отбор» справа сверху.</li>
+    <li>Всё в пунктирной рамке — заглушки: актёры вымышленные, фото со стока, проекты и контакты — примеры.</li>
+    <li id="rvNoteCm">Замечания присылайте сообщением — можно со скриншотом.</li>
+  </ol>
+  <button id="rvOk" type="button">Понятно</button>
+</aside>
+
+<div class="rv-bar" id="rvBar" hidden data-uncommentable>
+  <span>Кликните по месту, к которому относится комментарий</span>
+  <button type="button" id="rvCancel">Отмена</button>
+</div>
+<div class="rv-ring" id="rvRing" hidden data-uncommentable></div>
+<div class="rv-toast" id="rvToast" role="status" hidden data-uncommentable></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var NOTE_KEY = "chistilishe.note.v3";
+  var TARGETS = "[data-comment], article, figure, form, h1, h2, h3, p, li, section, header, footer";
+
+  var note   = document.getElementById("rvNote");
+  var noteCm = document.getElementById("rvNoteCm");
+  var cmBtn  = document.getElementById("rvCm");
+  var bar    = document.getElementById("rvBar");
+  var ring   = document.getElementById("rvRing");
+  var toast  = document.getElementById("rvToast");
+  var comments = null;
+  var picking  = false;
+  var hoverEl  = null;
+  var toastTimer = null;
+
+  function say(text){
+    toast.textContent = text;
+    toast.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(function(){ toast.hidden = true; }, 3800);
+  }
+
+  function seen(){
+    try { return window.localStorage.getItem(NOTE_KEY) === "1"; }
+    catch(e){ return false; }
+  }
+  function markSeen(){
+    try { window.localStorage.setItem(NOTE_KEY, "1"); }
+    catch(e){ /* не критично: записка покажется ещё раз */ }
+  }
+  function hideNote(){ note.hidden = true; markSeen(); placeDock(); }
+
+  var dock = document.getElementById("rvDock");
+  var narrow = window.matchMedia("(max-width: 720px)");
+  function placeDock(){
+    var away = narrow.matches && note.hidden && !picking && window.scrollY < window.innerHeight * 0.45;
+    dock.classList.toggle("rv-away", away);
+  }
+  window.addEventListener("scroll", placeDock, { passive:true });
+  narrow.addEventListener("change", placeDock);
+
+  if (!seen()) note.hidden = false;
+  document.getElementById("rvOk").addEventListener("click", hideNote);
+  placeDock();
+
+  function targetAt(node){
+    if (!node || !node.closest || node.closest("[data-uncommentable]")) return null;
+    return node.closest(TARGETS);
+  }
+  function drawRing(el){
+    hoverEl = el;
+    if (!el){ ring.hidden = true; return; }
+    var r = el.getBoundingClientRect();
+    ring.hidden = false;
+    ring.style.transform = "translate(" + (r.left - 5) + "px," + (r.top - 5) + "px)";
+    ring.style.width  = (r.width + 10) + "px";
+    ring.style.height = (r.height + 10) + "px";
+  }
+  function startPick(){
+    picking = true;
+    hideNote();
+    document.documentElement.classList.add("rv-picking");
+    bar.hidden = false;
+    cmBtn.textContent = "Отменить";
+  }
+  function stopPick(){
+    picking = false;
+    document.documentElement.classList.remove("rv-picking");
+    bar.hidden = true;
+    cmBtn.textContent = "Комментировать";
+    drawRing(null);
+  }
+  function disable(){
+    comments = null;
+    stopPick();
+    cmBtn.hidden = true;
+    noteCm.textContent = "Замечания присылайте сообщением — можно со скриншотом.";
+  }
+  function openAt(el){
+    if (!comments) return;
+    comments.openComposer({ element: el }).then(function(res){
+      if (!res || !res.opened) say("Окно комментария не открылось — попробуйте ещё раз");
+    }, function(err){
+      var code = err && err.code;
+      if (code === "rate_limited"){ say("Слишком часто — подождите пару секунд"); return; }
+      if (code === "invalid"){ say("К этому месту не прикрепить — выберите соседнее"); return; }
+      disable();
+      say("Комментарии здесь недоступны — пришлите замечание сообщением");
+    });
+  }
+
+  document.addEventListener("pointermove", function(e){
+    if (!picking || e.pointerType !== "mouse") return;
+    var t = targetAt(e.target);
+    if (t !== hoverEl) drawRing(t);
+  }, { passive:true });
+  window.addEventListener("scroll", function(){
+    if (picking && hoverEl) drawRing(hoverEl);
+  }, { passive:true });
+
+  // Перехват в фазе захвата: в режиме выбора клик по карточке выбирает
+  // место для комментария, а не открывает её.
+  document.addEventListener("click", function(e){
+    if (!picking) return;
+    if (e.target.closest && e.target.closest("[data-uncommentable]")) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var t = targetAt(e.target);
+    stopPick();
+    if (t) openAt(t);
+  }, true);
+  document.addEventListener("keydown", function(e){
+    if (picking && e.key === "Escape") stopPick();
+  });
+  cmBtn.addEventListener("click", function(){ if (picking) stopPick(); else startPick(); });
+  document.getElementById("rvCancel").addEventListener("click", stopPick);
+
+  // Страница может попросить комментарий к своему элементу (кнопка в карточке актёра).
+  window.__review = {
+    available: function(){ return !!comments; },
+    commentOn: function(el){ openAt(el); }
+  };
+
+  if (window.claude && typeof window.claude.use === "function"){
+    window.claude.use("comments").then(function(ns){
+      if (!ns) return;
+      comments = ns;
+      cmBtn.hidden = false;
+      noteCm.textContent = "Чтобы оставить замечание, нажмите «Комментировать» внизу и кликните по месту, к которому оно относится.";
+      document.dispatchEvent(new CustomEvent("review:ready"));
+    }, function(){ /* оболочка не ответила — остаётся запасной текст */ });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  "use strict";
+
+  var ACTORS = [{"id": "sokolov", "code": "01", "name": "Иван Соколов", "g": "m", "age": 27, "plays": [22, 32], "height": 178, "photo": "m3", "type": "Славянский, острые черты", "voice": "Баритон", "tags": ["Кино", "Театр", "Реклама"], "skills": ["Сценическое фехтование", "Мотоцикл (кат. А)", "Английский — свободно"], "credits": ["«Грани» — Артём, главная роль, сериал", "«Тишина» — Он, короткий метр", "Театр «Практика» — «Человек из Подольска»"], "status": "Свободен с 14 октября"}, {"id": "smirnova", "code": "02", "name": "Дарья Смирнова", "g": "f", "age": 23, "plays": [17, 26], "height": 168, "photo": "w1", "type": "Светлая, большие глаза", "voice": "Меццо-сопрано", "tags": ["Кино", "Сериалы", "Театр"], "skills": ["Вокал (эстрадный)", "Современный танец", "Верховая езда"], "credits": ["«Вне времени» — Аня, главная роль, полный метр", "«Грани» — Лиза, сериал", "Дипломный спектакль ГИТИС — «Три сестры»"], "status": "На съёмках до 30 сентября"}, {"id": "lebedev", "code": "03", "name": "Максим Лебедев", "g": "m", "age": 36, "plays": [30, 42], "height": 184, "photo": "m5", "type": "Характерный, живая мимика", "voice": "Бас", "tags": ["Кино", "Озвучка", "Театр"], "skills": ["Дикторская озвучка", "Бокс", "Водительские права кат. B, C"], "credits": ["«Тишина» — Отец, короткий метр", "Озвучка — более 40 рекламных роликов", "Театр им. Ермоловой — репертуар"], "status": "Свободен"}, {"id": "vereshagina", "code": "04", "name": "Анна Верещагина", "g": "f", "age": 30, "plays": [25, 35], "height": 167, "photo": "w4", "type": "Интеллигентный, мягкий", "voice": "Сопрано", "tags": ["Кино", "Сериалы", "Реклама"], "skills": ["Французский — свободно", "Фортепиано", "Работа с детьми в кадре"], "credits": ["«Вне времени» — старшая сестра Ани, полный метр", "Сериал «Отделение» — 12 серий", "Реклама федеральных брендов"], "status": "Свободна"}, {"id": "aslanov", "code": "05", "name": "Тимур Асланов", "g": "m", "age": 27, "plays": [23, 33], "height": 181, "photo": "m4", "type": "Южный, спортивный", "voice": "Тенор", "tags": ["Кино", "Театр"], "skills": ["Паркур", "Трюковая подготовка", "Азербайджанский — родной"], "credits": ["«Грани» — Рустам, сериал", "Курсовые работы ВГИК", "Пластический театр — резидент"], "status": "Свободен с 1 ноября"}, {"id": "remezova", "code": "06", "name": "Ольга Ремезова", "g": "f", "age": 52, "plays": [45, 60], "height": 166, "photo": "w5", "type": "Строгий, резкий профиль", "voice": "Альт", "tags": ["Кино", "Сериалы", "Озвучка"], "skills": ["Итальянский — разговорный", "Стрельба", "Преподаёт сценическую речь"], "credits": ["«Вне времени» — следователь, полный метр", "Сериал «Периметр» — сквозная роль", "Дубляж полнометражных фильмов"], "status": "Свободна"}, {"id": "mansurova", "code": "07", "name": "Алина Мансурова", "g": "f", "age": 24, "plays": [19, 28], "height": 163, "photo": "w2", "type": "Восточный, собранный", "voice": "Меццо-сопрано", "tags": ["Кино", "Театр"], "skills": ["Классический балет", "Татарский — родной", "Вождение (кат. B)"], "credits": ["«Тишина» — Сестра, короткий метр", "Театр «Мастерская» — «Бег»", "Клип группы «Сироты» — главная роль"], "status": "Свободна"}, {"id": "lanskaya", "code": "08", "name": "Вера Ланская", "g": "f", "age": 26, "plays": [20, 30], "height": 172, "photo": "w3", "type": "Природная, веснушки", "voice": "Сопрано", "tags": ["Кино", "Реклама"], "skills": ["Скалолазание", "Английский — свободно", "Фотомодель"], "credits": ["«Грани» — Катя, сериал", "Реклама спортивного бренда", "Короткий метр «Утро» — главная роль"], "status": "Свободна с 20 октября"}, {"id": "orlova", "code": "09", "name": "Людмила Орлова", "g": "f", "age": 64, "plays": [58, 72], "height": 160, "photo": "w6", "type": "Тёплая, характерная", "voice": "Альт", "tags": ["Кино", "Сериалы", "Театр"], "skills": ["Народный вокал", "Сценическое движение", "Педагог-стаж 30 лет"], "credits": ["Сериал «Отделение» — медсестра, сквозная роль", "«Вне времени» — бабушка Ани", "Малый театр — репертуар 1990–2020"], "status": "Свободна"}, {"id": "belyaev", "code": "10", "name": "Кирилл Беляев", "g": "m", "age": 24, "plays": [19, 28], "height": 183, "photo": "m1", "type": "Резкий, холодный", "voice": "Баритон", "tags": ["Кино", "Реклама"], "skills": ["Кикбоксинг", "Мотоцикл (кат. А)", "Немецкий — разговорный"], "credits": ["«Грани» — Денис, сериал", "Реклама автомобильного бренда", "Выпускник ВГИК 2025"], "status": "Свободен"}, {"id": "shestakov", "code": "11", "name": "Егор Шестаков", "g": "m", "age": 21, "plays": [17, 24], "height": 179, "photo": "m2", "type": "Северный, юношеский", "voice": "Тенор", "tags": ["Кино", "Сериалы"], "skills": ["Гитара", "Хоккей", "Английский — разговорный"], "credits": ["«Тишина» — Сын, короткий метр", "Веб-сериал «Общага» — 8 серий", "Студент Щукинского училища"], "status": "Учебный год: съёмки по выходным"}, {"id": "gromov", "code": "12", "name": "Виктор Громов", "g": "m", "age": 71, "plays": [62, 78], "height": 175, "photo": "m6", "type": "Благородный, седой", "voice": "Бас", "tags": ["Кино", "Театр", "Озвучка"], "skills": ["Шахматы", "Верховая езда", "Чтение классики — аудиокниги"], "credits": ["«Вне времени» — профессор", "МХТ — репертуар 1978–2015", "Озвучка документальных фильмов"], "status": "Свободен"}];
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var PICK_KEY = "chistilishe.v3.picked";
+  var HERO = ["m1", "w2", "m5", "w3", "m6"];
+
+  var ARROW = '<svg width="26" height="10" viewBox="0 0 26 10" aria-hidden="true"><path d="M0 5h24.5M20 1l4.5 4-4.5 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>';
+  var CROSS = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
+  var PLUS  = '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1v10M1 6h10" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
+  var PREV  = '<svg width="14" height="10" viewBox="0 0 14 10" aria-hidden="true"><path d="M13.5 5H1M5 1L1 5l4 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>';
+  var NEXT  = '<svg width="14" height="10" viewBox="0 0 14 10" aria-hidden="true"><path d="M.5 5H13M9 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>';
+
+  function photo(a, size){ return "../shared/portraits/" + a.photo + "-" + (size || 900) + ".webp"; }
+  function plays(a){ return a.plays[0] + "–" + a.plays[1]; }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]; }); }
+  function byId(id){ for (var i = 0; i < ACTORS.length; i++) if (ACTORS[i].id === id) return ACTORS[i]; return null; }
+  function byPhoto(p){ for (var i = 0; i < ACTORS.length; i++) if (ACTORS[i].photo === p) return ACTORS[i]; return null; }
+
+  document.getElementById("total").textContent = ACTORS.length;
+
+  /* ---------- герой: пять лиц ---------- */
+  document.getElementById("strip").innerHTML = HERO.map(function(p){
+    var a = byPhoto(p);
+    return '<a href="#actors" data-open="' + a.id + '" aria-label="' + esc(a.name) + '">' +
+      '<img src="' + photo(a, 1200) + '" alt="" width="1200" height="1800" fetchpriority="high">' +
+      '<span class="who">' + esc(a.name) + '</span></a>';
+  }).join("");
+  document.getElementById("strip").addEventListener("click", function(e){
+    var t = e.target.closest("[data-open]");
+    if (!t) return;
+    e.preventDefault();
+    openCard(t.dataset.open, t);
+  });
+
+  /* ---------- отбор: состояние ---------- */
+  var picked = [];
+  try {
+    var saved = JSON.parse(window.localStorage.getItem(PICK_KEY) || "[]");
+    if (Array.isArray(saved)) picked = saved.filter(function(id){ return !!byId(id); });
+  } catch(e){ /* хранилище недоступно — отбор живёт до перезагрузки */ }
+  function savePicked(){
+    try { window.localStorage.setItem(PICK_KEY, JSON.stringify(picked)); }
+    catch(e){ /* не критично */ }
+  }
+  function isPicked(id){ return picked.indexOf(id) !== -1; }
+  function togglePick(id){
+    picked = isPicked(id) ? picked.filter(function(x){ return x !== id; }) : picked.concat([id]);
+    savePicked();
+    renderPicked(true);
+  }
+
+  /* ---------- сетка ---------- */
+  var gridEl = document.getElementById("grid");
+  gridEl.innerHTML = ACTORS.map(function(a){
+    return '<li class="tile" data-id="' + a.id + '" data-comment>' +
+      '<button class="tile-open" type="button" aria-label="Открыть карточку: ' + esc(a.name) + '">' +
+        '<img src="' + photo(a) + '" alt="" loading="lazy" decoding="async" width="900" height="1350"></button>' +
+      '<div class="tile-cap">' +
+        '<span class="code num">ЧС-' + a.code + '</span>' +
+        '<h3>' + esc(a.name) + '</h3>' +
+        '<p class="meta num">' + plays(a) + ' лет · ' + a.height + ' см</p>' +
+        '<button class="add" type="button" data-pick="' + a.id + '" aria-pressed="false" aria-label="В отбор: ' + esc(a.name) + '">' + PLUS + '</button>' +
+      '</div>' +
+    '</li>';
+  }).join("");
+  gridEl.addEventListener("click", function(e){
+    var t = e.target.closest("button");
+    if (!t) return;
+    if (t.classList.contains("tile-open")) openCard(t.closest(".tile").dataset.id, t);
+    else if (t.dataset.pick) togglePick(t.dataset.pick);
+  });
+
+  /* ---------- указатель ---------- */
+  var indexEl = document.getElementById("index");
+  var namesEl = document.getElementById("names");
+  var peekEl  = document.getElementById("peek");
+  peekEl.innerHTML = ACTORS.map(function(a){
+    return '<img src="' + photo(a, 1200) + '" alt="" data-peek="' + a.id + '" loading="lazy" width="1200" height="1800">';
+  }).join("");
+  namesEl.innerHTML = ACTORS.map(function(a){
+    return '<li data-id="' + a.id + '" data-comment><button class="name-row" type="button" data-id="' + a.id + '">' +
+      '<img class="thumb" src="' + photo(a) + '" alt="" loading="lazy" width="900" height="1350">' +
+      '<span class="code num">ЧС-' + a.code + '</span>' +
+      '<span class="nm">' + esc(a.name) + '</span>' +
+      '<span class="age num">играет ' + plays(a) + '</span></button></li>';
+  }).join("");
+
+  // Наведение на имя гасит свет: зал темнеет, за списком проступает лицо.
+  function lightOn(id){
+    if (!canHover) return;
+    indexEl.classList.add("lit");
+    peekEl.querySelectorAll("img").forEach(function(img){ img.classList.toggle("on", img.dataset.peek === id); });
+    namesEl.querySelectorAll(".name-row").forEach(function(r){ r.classList.toggle("cur", r.dataset.id === id); });
+  }
+  function lightOff(){
+    indexEl.classList.remove("lit");
+    namesEl.querySelectorAll(".name-row.cur").forEach(function(r){ r.classList.remove("cur"); });
+  }
+  namesEl.addEventListener("pointerover", function(e){
+    var r = e.target.closest(".name-row");
+    if (r && e.pointerType === "mouse") lightOn(r.dataset.id);
+  });
+  namesEl.addEventListener("pointerleave", lightOff);
+  namesEl.addEventListener("focusin", function(e){
+    var r = e.target.closest(".name-row");
+    if (r && r.matches(":focus-visible")) lightOn(r.dataset.id);
+  });
+  namesEl.addEventListener("focusout", function(e){
+    if (!namesEl.contains(e.relatedTarget)) lightOff();
+  });
+  namesEl.addEventListener("click", function(e){
+    var r = e.target.closest(".name-row");
+    if (r){ lightOff(); openCard(r.dataset.id, r); }
+  });
+
+  /* ---------- вид: сетка или указатель ---------- */
+  var viewBtns = document.querySelectorAll("[data-view]");
+  function setView(v){
+    viewBtns.forEach(function(b){ b.setAttribute("aria-pressed", b.dataset.view === v ? "true" : "false"); });
+    gridEl.hidden = v !== "grid";
+    indexEl.hidden = v !== "index";
+  }
+  viewBtns.forEach(function(b){ b.addEventListener("click", function(){ setView(b.dataset.view); }); });
+
+  /* ---------- фильтр-фраза ---------- */
+  var filter = { g:"all", a:"all" };
+  function ageMatch(a, v){
+    if (v === "young") return a.plays[0] < 25;
+    if (v === "mid")   return a.plays[0] <= 40 && a.plays[1] >= 25;
+    if (v === "old")   return a.plays[1] > 40;
+    return true;
+  }
+  function applyFilter(){
+    document.querySelectorAll(".phrase .opt").forEach(function(b){
+      b.setAttribute("aria-pressed", filter[b.dataset.f] === b.dataset.v ? "true" : "false");
+    });
+    var n = 0;
+    ACTORS.forEach(function(a){
+      var ok = (filter.g === "all" || a.g === filter.g) && ageMatch(a, filter.a);
+      if (ok) n++;
+      document.querySelectorAll('[data-id="' + a.id + '"]').forEach(function(el){
+        if (el.classList.contains("tile") || el.tagName === "LI") el.classList.toggle("off", !ok);
+      });
+    });
+    document.getElementById("tally").textContent = "совпадают " + n + " из " + ACTORS.length;
+  }
+  document.getElementById("phrase").addEventListener("click", function(e){
+    var b = e.target.closest(".opt");
+    if (!b) return;
+    filter[b.dataset.f] = b.dataset.v;
+    applyFilter();
+  });
+  // «Актрисы» и «Актёры» в шапке сразу настраивают фразу.
+  document.querySelectorAll(".bar nav [data-g]").forEach(function(a){
+    a.addEventListener("click", function(){ filter.g = a.dataset.g; applyFilter(); });
+  });
+
+  /* ---------- карточка актёра ---------- */
+  var card = document.getElementById("card");
+  var current = null;
+  var cardOrigin = null;
+
+  function openCard(id, origin){
+    var a = byId(id);
+    if (!a) return;
+    current = a;
+    if (origin) cardOrigin = origin;
+    var canComment = !!(window.__review && window.__review.available());
+    card.innerHTML =
+      '<div class="card-inner">' +
+        '<div class="card-photo"><img src="' + photo(a, 1200) + '" alt="' + esc(a.name) + ', временное фото"><span class="temp">временное фото</span></div>' +
+        '<div class="card-body">' +
+          '<div class="card-top"><span class="code num">ЧС-' + a.code + ' · ' + (ACTORS.indexOf(a) + 1) + ' из ' + ACTORS.length + '</span>' +
+            '<span class="step"><button class="ctl" type="button" data-step="-1" aria-label="Предыдущий актёр">' + PREV + '</button>' +
+            '<button class="ctl" type="button" data-step="1" aria-label="Следующий актёр">' + NEXT + '</button>' +
+            '<button class="ctl" type="button" data-close aria-label="Закрыть карточку">' + CROSS + '</button></span></div>' +
+          '<h2 id="cardName">' + esc(a.name) + '</h2>' +
+          '<p class="live"><i></i>' + esc(a.status) + '</p>' +
+          '<div class="figs">' +
+            '<div><b>' + plays(a) + '</b><span>играет, лет</span></div>' +
+            '<div><b>' + a.height + '</b><span>рост, см</span></div>' +
+            '<div><b>' + a.age + '</b><span>возраст</span></div>' +
+          '</div>' +
+          '<dl class="facts">' +
+            '<dt>Типаж</dt><dd>' + esc(a.type) + '</dd>' +
+            '<dt>Голос</dt><dd>' + esc(a.voice) + '</dd>' +
+            '<dt>Где</dt><dd>' + a.tags.map(esc).join(", ") + '</dd>' +
+            '<dt>Навыки</dt><dd><ul>' + a.skills.map(function(s){ return '<li>' + esc(s) + '</li>'; }).join("") + '</ul></dd>' +
+            '<dt>Роли</dt><dd><ul>' + a.credits.map(function(s){ return '<li>' + esc(s) + '</li>'; }).join("") + '</ul></dd>' +
+          '</dl>' +
+          '<p class="flag" style="margin:0">Данные и занятость — для примера. Здесь будут фотосессия и шоурил</p>' +
+          '<div class="card-actions">' +
+            '<button class="solid' + (isPicked(a.id) ? ' picked' : '') + '" type="button" data-pick="' + a.id + '">' + (isPicked(a.id) ? 'В отборе' : 'В отбор') + '</button>' +
+            '<button class="solid line" type="button" data-request>Запросить ' + ARROW + '</button>' +
+            (canComment ? '<button class="card-cm" type="button" data-cm>Комментировать карточку</button>' : '') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    if (!card.open) card.showModal();
+    card.querySelector("[data-close]").focus({ preventScroll:true });
+  }
+
+  function step(dir){
+    var i = ACTORS.indexOf(current);
+    openCard(ACTORS[(i + dir + ACTORS.length) % ACTORS.length].id);
+    var btn = card.querySelector('[data-step="' + dir + '"]');
+    if (btn) btn.focus({ preventScroll:true });
+  }
+
+  card.addEventListener("click", function(e){
+    var t = e.target.closest("button");
+    if (!t || !current) return;
+    if (t.hasAttribute("data-close")) card.close();
+    else if (t.dataset.step) step(parseInt(t.dataset.step, 10));
+    else if (t.dataset.pick){
+      togglePick(t.dataset.pick);
+      t.classList.toggle("picked", isPicked(current.id));
+      t.textContent = isPicked(current.id) ? "В отборе" : "В отбор";
+    }
+    else if (t.hasAttribute("data-request")){
+      if (!isPicked(current.id)) togglePick(current.id);
+      card.close();
+      goRequest();
+    }
+    else if (t.hasAttribute("data-cm")){
+      var target = document.querySelector('.tile[data-id="' + current.id + '"]');
+      card.close();
+      if (target) window.__review.commentOn(target);
+    }
+  });
+  card.addEventListener("keydown", function(e){
+    if (e.key === "ArrowRight"){ e.preventDefault(); step(1); }
+    if (e.key === "ArrowLeft"){ e.preventDefault(); step(-1); }
+  });
+  card.addEventListener("close", function(){
+    if (cardOrigin && document.contains(cardOrigin)) cardOrigin.focus({ preventScroll:true });
+  });
+
+  /* ---------- панель отбора ---------- */
+  var sl = document.getElementById("shortlist");
+  var slList = document.getElementById("slList");
+  document.getElementById("pickOpen").addEventListener("click", function(){ sl.showModal(); });
+  sl.addEventListener("click", function(e){
+    if (e.target === sl){ sl.close(); return; }
+    var t = e.target.closest("button");
+    if (!t) return;
+    if (t.hasAttribute("data-close")) sl.close();
+    else if (t.dataset.remove) togglePick(t.dataset.remove);
+  });
+
+  function renderPicked(bump){
+    var n = picked.length;
+    document.querySelectorAll("[data-count]").forEach(function(el){ el.textContent = n; });
+    var opener = document.getElementById("pickOpen");
+    opener.classList.toggle("has", n > 0);
+    if (bump && !reduced){
+      opener.classList.remove("bump");
+      void opener.offsetWidth;
+      opener.classList.add("bump");
+    }
+    document.querySelectorAll(".add[data-pick]").forEach(function(b){
+      var on = isPicked(b.dataset.pick);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      var a = byId(b.dataset.pick);
+      b.setAttribute("aria-label", (on ? "Убрать из отбора: " : "В отбор: ") + a.name);
+    });
+    document.getElementById("slEmpty").hidden = n > 0;
+    document.getElementById("slRequest").disabled = n === 0;
+    document.getElementById("slCopy").disabled = n === 0;
+    slList.innerHTML = picked.map(function(id){
+      var a = byId(id);
+      return '<li><img src="' + photo(a) + '" alt=""><div><span class="nm">' + esc(a.name) + '</span>' +
+        '<small class="num">играет ' + plays(a) + ' · ' + a.height + ' см</small></div>' +
+        '<button type="button" data-remove="' + a.id + '">Убрать</button></li>';
+    }).join("");
+    var line = document.getElementById("pickedLine");
+    line.innerHTML = n
+      ? 'В запросе: <b>' + picked.map(function(id){ return esc(byId(id).name); }).join(", ") + '</b>'
+      : 'Отбор пуст — добавьте актёров кнопкой «+», и они попадут в запрос.';
+  }
+
+  function goRequest(){
+    if (sl.open) sl.close();
+    document.getElementById("contacts").scrollIntoView({ behavior: reduced ? "auto" : "smooth" });
+    window.setTimeout(function(){ document.getElementById("fProject").focus({ preventScroll:true }); }, reduced ? 0 : 600);
+  }
+  document.getElementById("slRequest").addEventListener("click", goRequest);
+
+  /* ---------- копирование ---------- */
+  function copyText(text, btn, done){
+    function fallback(){
+      var holder = document.createElement("pre");
+      holder.textContent = text;
+      holder.style.cssText = "position:fixed;left:-9999px;top:0";
+      document.body.appendChild(holder);
+      var r = document.createRange();
+      r.selectNodeContents(holder);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch(e){ ok = false; }
+      s.removeAllRanges();
+      holder.remove();
+      btn.textContent = ok ? done : "Не вышло — выделите вручную";
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ btn.textContent = done; }, fallback);
+    } else fallback();
+  }
+  document.getElementById("slCopy").addEventListener("click", function(){
+    copyText(picked.map(function(id){
+      var a = byId(id);
+      return "ЧС-" + a.code + " " + a.name + " — играет " + plays(a) + ", рост " + a.height + " см";
+    }).join("\n"), this, "Скопировано");
+  });
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.addEventListener("click", function(){ copyText(document.getElementById(b.dataset.copy).textContent, b, "Скопировано"); });
+  });
+
+  /* ---------- запрос ---------- */
+  document.getElementById("request").addEventListener("submit", function(e){
+    e.preventDefault();
+    var err = document.getElementById("formErr");
+    var names = { fProject:"«Проект»", fBrief:"«Кого ищете»", fContact:"«Как с вами связаться»" };
+    var missing = Object.keys(names).filter(function(id){ return !document.getElementById(id).value.trim(); });
+    if (missing.length){
+      err.textContent = "Заполните " + (missing.length === 1 ? "поле " : "поля ") + missing.map(function(id){ return names[id]; }).join(", ") + ".";
+      err.hidden = false;
+      document.getElementById(missing[0]).focus();
+      return;
+    }
+    err.hidden = true;
+    document.getElementById("formOk").hidden = false;
+  });
+
+  renderPicked(false);
+  applyFilter();
+})();
+</script>
+</body>
+</html>
