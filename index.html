@@ -7,7 +7,7 @@
 <meta name="description" content="Актёрское агентство «Чистилище». Актёры для кино, сериалов, театра и рекламы: визитки, параметры, фильмография. Запрос на актёра — прямо с сайта.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#CFC5AE">
-<meta name="build" content="20261025-171649">
+<meta name="build" content="20261031-112345">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Чистилище — актёрское агентство">
@@ -341,12 +341,12 @@ section{
 /* ---------- актёры ------------------------------------------- */
 .actors-grid{
   display:grid;
-  grid-template-columns:repeat(3, 1fr);
+  grid-template-columns:repeat(3, minmax(0, 1fr));
   gap:clamp(2rem,3.5vw,3.2rem) clamp(1.5rem,3vw,2.6rem);
 }
-@media (max-width: 900px){ .actors-grid{grid-template-columns:repeat(2, 1fr)} }
+@media (max-width: 900px){ .actors-grid{grid-template-columns:repeat(2, minmax(0, 1fr))} }
 @media (max-width: 520px){
-  .actors-grid{grid-template-columns:repeat(2, 1fr);gap:1.6rem .9rem}
+  .actors-grid{grid-template-columns:repeat(2, minmax(0, 1fr));gap:1.6rem .9rem}
   .actors-grid .portrait{border-width:.45rem}
   .actor .meta{padding-top:.7rem;gap:.25rem}
   .actor .nm{font-size:.86rem;letter-spacing:.08em}
@@ -355,6 +355,7 @@ section{
 }
 .actor{
   display:flex;
+  min-width:0;
   flex-direction:column;
   align-items:stretch;
   gap:0;
@@ -444,6 +445,7 @@ section{
   padding-top:.95rem;
 }
 .actor .nm{
+  overflow-wrap:anywhere;
   font-family:var(--t-display);
   font-size:1.05rem;
   letter-spacing:.12em;
@@ -846,10 +848,16 @@ footer{
 }
 @media (max-width: 520px){
   :root{--shell: calc(100% - 2.5rem)}
+  .masthead .kicker{min-width:0;max-width:100%}
+  .masthead .kicker span{white-space:normal}
   .contacts-row{flex-direction:column;align-items:flex-start;gap:.9rem}
   .contacts-row > *{padding:0;border-left:0}
   .sheet{width:calc(100% - 2rem);margin:1rem auto 1.5rem}
   .topnav nav{gap:1.1rem}
+}
+@media (max-width: 380px){
+  .dossier .hd{flex-direction:column;align-items:flex-start}
+  .dossier h3{overflow-wrap:anywhere}
 }
 </style>
 </head>
@@ -1112,6 +1120,7 @@ footer{
   }
 
   function openDossier(a, i, origin){
+    window.clearTimeout(closeTimer);
     lastFocus = origin;
     dossier.innerHTML =
       '<div class="inner">' +
@@ -1230,24 +1239,28 @@ footer{
   lightbox.addEventListener("click", function(e){ if (e.target === lightbox) closeLightbox(); });
 
   scrim.addEventListener("click", function(){ closeDossier(); });
+  function trapFocus(e, container){
+    if (e.key !== "Tab") return;
+    var f = Array.prototype.filter.call(
+      container.querySelectorAll("button, a[href], input, textarea, video[controls], [tabindex]"),
+      function(el){ return !el.disabled && el.tabIndex >= 0 && el.getClientRects().length > 0; });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
   document.addEventListener("keydown", function(e){
     if (!lightbox.hidden){
       if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowRight") stepLightbox(1);
       if (e.key === "ArrowLeft") stepLightbox(-1);
+      trapFocus(e, lightbox);
       return;
     }
     if (dossier.hidden) return;
     if (e.key === "Escape"){ closeDossier(); return; }
-    if (e.key !== "Tab") return;
     // aria-modal обещает, что Tab не уйдёт на страницу под визиткой.
-    var f = Array.prototype.filter.call(
-      dossier.querySelectorAll("button, a[href], input, textarea"),
-      function(el){ return el.getClientRects().length > 0; });
-    if (!f.length) return;
-    var first = f[0], last = f[f.length - 1];
-    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    trapFocus(e, dossier);
   });
 
   /* ---------------- фото актёров на первом экране ----------------
