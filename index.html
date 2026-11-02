@@ -9,7 +9,7 @@
 <meta name="description" content="Актёрское агентство «Чистилище». Актёры для кино, сериалов, театра и рекламы: визитки, параметры, фильмография. Запрос на актёра — прямо с сайта.">
 
 <meta name="theme-color" content="#CFC5AE">
-<meta name="build" content="20261102-212400">
+<meta name="build" content="20261102-212910">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Чистилище — актёрское агентство">
@@ -186,16 +186,15 @@ a,button,label{-webkit-tap-highlight-color:transparent}
   margin:0 auto;
   padding:2.2rem 0 1.4rem;
   display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:2rem;
-  flex-wrap:wrap;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:.65rem;
 }
 /* Логотип — вектор с макета заказчицы (25.10), а не шрифт. Цвет — currentColor. */
 .logo{display:block;width:100%;height:auto;fill:currentColor}
 .wordmark{margin:0;line-height:0;width:clamp(13rem,7rem + 24vw,30rem)}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-.masthead .kicker{display:flex;gap:2.4rem;align-items:baseline;flex-wrap:wrap}
+.masthead .kicker{font-size:clamp(.625rem,.6rem + .1vw,.6875rem);letter-spacing:.24em}
 .masthead .kicker span{white-space:nowrap}
 
 .topnav{
@@ -856,7 +855,6 @@ footer{
      на узком они не дают строке перенестись и её обрезает. */
   .hero .display br{display:none}
   .masthead{padding:1.6rem 0 1rem;gap:.6rem}
-  .masthead .kicker{gap:.2rem;flex-direction:column}
   .hero-foot{margin-top:1.6rem}
 }
 @media (max-width: 520px){
