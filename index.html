@@ -9,7 +9,7 @@
 <meta name="description" content="Актёрское агентство «Чистилище». Актёры для кино, сериалов, театра и рекламы: визитки, параметры, фильмография. Запрос на актёра — прямо с сайта.">
 
 <meta name="theme-color" content="#CFC5AE">
-<meta name="build" content="20261102-205446">
+<meta name="build" content="20261102-210815">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Чистилище — актёрское агентство">
@@ -404,7 +404,6 @@ section{
   box-shadow:inset 0 0 0 1px rgba(78,66,50,.34), inset 0 0 40px rgba(46,40,32,.12);
   transition:box-shadow .25s var(--ease-out);
 }
-/* Временные фото проходят ту же сепию, что и проекты: единая обработка. */
 .portrait img{
   position:absolute;
   inset:0;
@@ -415,6 +414,8 @@ section{
   filter:sepia(.38) contrast(.96);
   transition:filter .3s var(--ease-out);
 }
+/* Обложки артистов остаются чёрно-белыми при наведении и фокусе. */
+.actor .portrait img{filter:grayscale(1) contrast(.96)}
 .portrait .mark{
   position:absolute;
   left:50%; top:50%;
@@ -433,7 +434,7 @@ section{
   transform:translateY(-4px);
 }
 .actor:focus-visible .portrait::after{box-shadow:inset 0 0 0 1px var(--foliage-hi), inset 0 0 44px rgba(46,40,32,.14)}
-.actor:focus-visible .portrait img{filter:sepia(.12) contrast(1)}
+.actor:focus-visible .portrait img{filter:grayscale(1) contrast(1)}
 .actor:active .portrait{transform:translateY(-2px) scale(.985);transition-duration:.12s}
 
 /* Инициал даёт карточкам различие, пока нет настоящих фотографий. */
@@ -804,7 +805,7 @@ footer{
     transform:translateY(-4px);
   }
   .actor:hover .portrait::after{box-shadow:inset 0 0 0 1px var(--foliage-hi), inset 0 0 44px rgba(46,40,32,.14)}
-  .actor:hover .portrait img{filter:sepia(.12) contrast(1)}
+  .actor:hover .portrait img{filter:grayscale(1) contrast(1)}
   .actor:active .portrait{transform:translateY(-2px) scale(.985)}
   .project:hover .still{
     transform:translateY(-4px);
