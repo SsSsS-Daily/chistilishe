@@ -2,14 +2,14 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;sha256-mWCfT4AkRe58A5NOYTnGSKuBcbgSSCLuR2bQvh0wzgQ=&#x27;; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data:; font-src &#x27;self&#x27;; media-src &#x27;self&#x27;; connect-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;">
+<meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;sha256-xV99Xm0pyC8dJZBuZy/54LNYxRe1bma0F8aZAfKbqnc=&#x27;; style-src &#x27;self&#x27; &#x27;unsafe-inline&#x27;; img-src &#x27;self&#x27; data:; font-src &#x27;self&#x27;; media-src &#x27;self&#x27;; connect-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Чистилище — актёрское агентство</title>
 <meta name="description" content="Актёрское агентство «Чистилище». Актёры для кино, сериалов, театра и рекламы: визитки, параметры, фильмография. Запрос на актёра — прямо с сайта.">
 
-<meta name="theme-color" content="#CFC5AE">
-<meta name="build" content="20261102-213714">
+<meta name="theme-color" content="#9B1D1D">
+<meta name="build" content="20261108-001714">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Чистилище — актёрское агентство">
@@ -35,27 +35,27 @@
 
 /* ============================================================
    ЧИСТИЛИЩЕ — сайт актёрского агентства
-   Одна визуальная среда: пергамент, сепия, приглушённая листва.
+   Палитра Оли: Sky Blue, Crimson Red, чёрно-белые портреты.
    Тема одна намеренно — цвета заданы явно, фон не наследуется.
    ============================================================ */
 
 :root{
-  --ground:     #CFC5AE;   /* стол: самый дальний план */
-  --paper:      #EFEAE0;   /* лист бумаги: на нём живёт весь контент */
-  --paper-deep: #E3DDCD;   /* утопленные панели на листе */
-  --paper-warm: #F7F4EC;   /* паспарту, выдвижная панель */
-  --mat:        #F6F2E8;   /* поле паспарту вокруг фотографий */
-  --stone:      #C6BCA8;
-  --stone-deep: #A2977F;
-  --ink:        #2C2822;
-  --ink-soft:   #595145;
-  --ink-faint:  #93897626;
-  --bark:       #6B5F4E;
-  --foliage:    #7B8A61;
-  --foliage-lo: #9AA683;
-  --foliage-hi: #59653F;
-  --sepia-lo:   #4A4239;
-  --sepia-hi:   #B9AC96;
+  --ground:     #9B1D1D;   /* внешний фон с гербарием */
+  --paper:      #AFD9FF;   /* основной голубой лист */
+  --paper-deep: #A0CFF7;   /* утопленные панели на листе */
+  --paper-warm: #CBE5FF;   /* светлые панели и выдвижная анкета */
+  --mat:        #D7ECFF;   /* холодное паспарту вокруг фотографий */
+  --stone:      #8EA4C1;
+  --stone-deep: #82627C;
+  --ink:        #9B1D1D;
+  --ink-soft:   #7E2430;
+  --ink-faint:  #9B1D1D26;
+  --bark:       #BBCDE8;
+  --foliage:    #9B1D1D;
+  --foliage-lo: #E4A1AA;
+  --foliage-hi: #74151F;
+  --sepia-lo:   #24384B;
+  --sepia-hi:   #BDD5EB;
 
   --shell: min(1180px, 100% - 5rem);
 
@@ -136,9 +136,9 @@ body::before{
   margin:2.5rem auto 3rem;
   background:var(--paper);
   box-shadow:
-    0 1px 3px rgba(62,52,38,.10),
-    0 10px 26px rgba(62,52,38,.13),
-    0 34px 70px rgba(62,52,38,.16);
+    0 1px 3px rgba(24,24,45,.10),
+    0 10px 26px rgba(24,24,45,.13),
+    0 34px 70px rgba(24,24,45,.16);
 }
 
 .page{position:relative}
@@ -290,55 +290,36 @@ section{
 .cta:active{transform:scale(.97)}
 .cta .arr{display:inline-flex;transition:transform .2s var(--ease-out)}
 
-.hero-foot{
-  grid-column:1 / -1;
-  display:flex;
-  justify-content:flex-end;
-  align-items:flex-end;
-  gap:2rem;
-  flex-wrap:wrap;
-  margin-top:2.5rem;
-}
-.hero-foot em{font-style:italic;font-weight:300;color:var(--ink-soft)}
-
 /* --- фото актёров по очереди (пометка заказчика 25.10) -------- */
 .hero-visual{
   position:relative;
   aspect-ratio:4 / 5;
   min-height:20rem;
   background:var(--sepia-lo);
-  filter:grayscale(1) contrast(1.04);
   overflow:hidden;
   border:.85rem solid var(--mat);
   box-shadow:
-    inset 0 0 0 1px rgba(78,66,50,.36),
-    0 2px 5px rgba(62,52,38,.13),
-    0 18px 40px rgba(62,52,38,.17);
+    inset 0 0 0 1px rgba(40,42,66,.36),
+    0 2px 5px rgba(24,24,45,.13),
+    0 18px 40px rgba(24,24,45,.17);
 }
 .hero-visual .slide{
   position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:50% 22%;
+  filter:grayscale(1) contrast(1.04);
   opacity:0;transition:opacity 1.4s ease;
 }
 .hero-visual .slide.on{opacity:1}
 .hero-visual .who{
   position:absolute;right:1.25rem;bottom:1.1rem;margin:0;
-  color:#F4F0E6;text-shadow:0 1px 3px rgba(28,24,18,.55);
+  color:#EAF5FF;text-shadow:0 1px 3px rgba(15,23,32,.75);
   text-decoration:none;transition:opacity .6s ease;
 }
 .hero-visual .vignette{
   position:absolute;inset:0;
-  background:radial-gradient(75% 60% at 50% 45%, transparent 0%, rgba(46,40,32,.28) 100%);
+  background:radial-gradient(75% 60% at 50% 45%, transparent 0%, rgba(19,29,45,.28) 100%);
   pointer-events:none;
 }
-.hero-visual .plate{
-  position:absolute;
-  left:1.25rem;
-  bottom:1.1rem;
-  color:#F4F0E6;
-  text-shadow:0 1px 3px rgba(28,24,18,.55);
-}
-
 /* ---------- актёры ------------------------------------------- */
 .actor-search{display:flex;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin:0 0 2rem}
 .actor-search label{display:flex;flex-direction:column;gap:.55rem;flex:1 1 20rem;min-width:0}
@@ -386,13 +367,13 @@ section{
   overflow:hidden;
   background:
     linear-gradient(calc(158deg + var(--i) * 11deg),
-      hsl(40 16% calc(88% - var(--i) * 0.9%)) 0%,
-      hsl(38 13% calc(79% - var(--i) * 0.8%)) 54%,
-      hsl(36 12% calc(69% - var(--i) * 0.7%)) 100%);
+      hsl(209 46% calc(88% - var(--i) * 0.9%)) 0%,
+      hsl(212 32% calc(79% - var(--i) * 0.8%)) 54%,
+      hsl(216 25% calc(69% - var(--i) * 0.7%)) 100%);
   border:.72rem solid var(--mat);
   box-shadow:
-    0 1px 2px rgba(62,52,38,.13),
-    0 9px 22px rgba(62,52,38,.15);
+    0 1px 2px rgba(24,24,45,.13),
+    0 9px 22px rgba(24,24,45,.15);
   transition:box-shadow .25s var(--ease-out), transform .25s var(--ease-out);
 }
 .portrait::after{
@@ -400,7 +381,7 @@ section{
   position:absolute;
   inset:0;
   pointer-events:none;
-  box-shadow:inset 0 0 0 1px rgba(78,66,50,.34), inset 0 0 40px rgba(46,40,32,.12);
+  box-shadow:inset 0 0 0 1px rgba(40,42,66,.34), inset 0 0 40px rgba(19,29,45,.12);
   transition:box-shadow .25s var(--ease-out);
 }
 .portrait img{
@@ -410,7 +391,7 @@ section{
   height:100%;
   object-fit:cover;
   object-position:50% 20%;
-  filter:sepia(.38) contrast(.96);
+  filter:contrast(.96);
   transition:filter .3s var(--ease-out);
 }
 /* Обложки артистов остаются чёрно-белыми при наведении и фокусе. */
@@ -429,10 +410,10 @@ section{
   transform:translateX(-50%);
 }
 .actor:focus-visible .portrait{
-  box-shadow:0 2px 4px rgba(62,52,38,.14), 0 16px 34px rgba(62,52,38,.2);
+  box-shadow:0 2px 4px rgba(24,24,45,.14), 0 16px 34px rgba(24,24,45,.2);
   transform:translateY(-4px);
 }
-.actor:focus-visible .portrait::after{box-shadow:inset 0 0 0 1px var(--foliage-hi), inset 0 0 44px rgba(46,40,32,.14)}
+.actor:focus-visible .portrait::after{box-shadow:inset 0 0 0 1px var(--foliage-hi), inset 0 0 44px rgba(19,29,45,.14)}
 .actor:focus-visible .portrait img{filter:grayscale(1) contrast(1)}
 .actor:active .portrait{transform:translateY(-2px) scale(.985);transition-duration:.12s}
 
@@ -492,7 +473,7 @@ section{
   justify-content:center;
   padding:clamp(2.5rem,5vw,4rem) 2rem;
   background:var(--paper-deep);
-  box-shadow:inset 0 0 0 1px var(--stone), 0 1px 2px rgba(62,52,38,.09), 0 8px 20px rgba(62,52,38,.10);
+  box-shadow:inset 0 0 0 1px var(--stone), 0 1px 2px rgba(24,24,45,.09), 0 8px 20px rgba(24,24,45,.10);
 }
 .credo p{
   font-family:var(--t-display);
@@ -536,10 +517,10 @@ section{
   overflow:hidden;
   border:.72rem solid var(--mat);
   box-shadow:
-    inset 0 0 0 1px rgba(78,66,50,.34),
-    0 1px 2px rgba(62,52,38,.13),
-    0 9px 22px rgba(62,52,38,.15);
-  filter:sepia(.4) contrast(.96);
+    inset 0 0 0 1px rgba(40,42,66,.34),
+    0 1px 2px rgba(24,24,45,.13),
+    0 9px 22px rgba(24,24,45,.15);
+  filter:contrast(.96);
   transition:filter .3s var(--ease-out), box-shadow .3s var(--ease-out), transform .3s var(--ease-out);
 }
 .still::after{
@@ -572,10 +553,10 @@ section{
 .poster .pic{
   aspect-ratio:2 / 3;overflow:hidden;background:var(--paper-deep);
   border:.35rem solid var(--mat);
-  box-shadow:0 1px 2px rgba(62,52,38,.13),0 7px 16px rgba(62,52,38,.14);
+  box-shadow:0 1px 2px rgba(24,24,45,.13),0 7px 16px rgba(24,24,45,.14);
   transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out);
 }
-.poster img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(.18) contrast(.98)}
+.poster img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(.98)}
 .poster .t{font-family:var(--t-display);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.25;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;hyphens:auto}
 .poster .y{font-family:var(--t-ui);font-size:var(--label);letter-spacing:var(--track-mid);color:var(--ink-soft);margin-top:-.25rem}
@@ -665,7 +646,7 @@ footer{
   position:fixed;
   inset:0;
   z-index:8;
-  background:rgba(38,33,26,.45);
+  background:rgba(15,23,32,.45);
   opacity:0;
   transition:opacity .2s ease;
 }
@@ -678,7 +659,7 @@ footer{
   z-index:9;
   width:min(30rem, 100%);
   background:var(--paper-warm);
-  box-shadow:-1px 0 0 var(--stone-deep), -30px 0 60px rgba(38,33,26,.18);
+  box-shadow:-1px 0 0 var(--stone-deep), -30px 0 60px rgba(15,23,32,.18);
   overflow-y:auto;
   transform:translateX(100%);
   overscroll-behavior:contain;
@@ -723,10 +704,10 @@ footer{
 /* Видео-визитка: та же рамка-паспарту, что у фото. */
 .reel-box{margin:0;display:flex;flex-direction:column;gap:.5rem}
 .dossier .reel{display:block;width:100%;max-height:60vh;background:var(--sepia-lo);border:.5rem solid var(--mat);
-  box-shadow:0 1px 2px rgba(62,52,38,.13),0 9px 22px rgba(62,52,38,.15)}
+  box-shadow:0 1px 2px rgba(24,24,45,.13),0 9px 22px rgba(24,24,45,.15)}
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
 .gal-item{padding:0;border:.3rem solid var(--mat);background:var(--paper-deep);cursor:zoom-in;aspect-ratio:2/3;overflow:hidden;
-  box-shadow:0 1px 2px rgba(62,52,38,.13);transition:transform .16s var(--ease-out)}
+  box-shadow:0 1px 2px rgba(24,24,45,.13);transition:transform .16s var(--ease-out)}
 .gal-item img{width:100%;height:100%;object-fit:cover;display:block}
 .gal-item:active{transform:scale(.97)}
 .dos-links{display:flex;flex-wrap:wrap;gap:.5rem 0;margin:0;padding:.2rem 0 0}
@@ -745,16 +726,16 @@ footer{
 .agent .messengers{margin-top:.35rem}
 .agent .messengers a{padding:.45rem .8rem}
 .dos-links a{text-decoration:none;white-space:nowrap}
-.lightbox{position:fixed;inset:0;z-index:12;background:rgba(28,24,18,.92);display:flex;align-items:center;justify-content:center}
+.lightbox{position:fixed;inset:0;z-index:12;background:rgba(15,23,32,.92);display:flex;align-items:center;justify-content:center}
 .lightbox[hidden]{display:none!important}
 .lightbox img{max-width:calc(100vw - 2rem);max-height:calc(100vh - 6rem);object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.lb-btn{position:absolute;background:rgba(247,244,236,.1);color:#F4F0E6;border:1px solid rgba(247,244,236,.4);
+.lb-btn{position:absolute;background:rgba(215,236,255,.1);color:#EAF5FF;border:1px solid rgba(215,236,255,.4);
   font-family:var(--t-ui);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;padding:.6rem .9rem;cursor:pointer}
 .lb-prev{left:1rem;top:50%;transform:translateY(-50%)}
 .lb-next{right:1rem;top:50%;transform:translateY(-50%)}
 .lb-close{right:1rem;top:1rem}
 .lb-download{left:1rem;top:1rem;text-decoration:none}
-.lb-count{position:absolute;left:50%;bottom:1.2rem;transform:translateX(-50%);color:#F4F0E6}
+.lb-count{position:absolute;left:50%;bottom:1.2rem;transform:translateX(-50%);color:#EAF5FF}
 .dos-actions{display:flex;flex-wrap:wrap;gap:.7rem}
 .dossier ul{margin:0;padding-left:1.1rem;color:var(--ink-soft);font-weight:300}
 .dossier li{margin-bottom:.35rem}
@@ -800,24 +781,24 @@ footer{
   /* Было: светлый текст на --stone-deep, 2.6:1. Стало 7:1. */
   .cta:hover .arr{transform:translateX(5px)}
   .actor:hover .portrait{
-    box-shadow:0 2px 4px rgba(62,52,38,.14), 0 16px 34px rgba(62,52,38,.2);
+    box-shadow:0 2px 4px rgba(24,24,45,.14), 0 16px 34px rgba(24,24,45,.2);
     transform:translateY(-4px);
   }
-  .actor:hover .portrait::after{box-shadow:inset 0 0 0 1px var(--foliage-hi), inset 0 0 44px rgba(46,40,32,.14)}
+  .actor:hover .portrait::after{box-shadow:inset 0 0 0 1px var(--foliage-hi), inset 0 0 44px rgba(19,29,45,.14)}
   .actor:hover .portrait img{filter:grayscale(1) contrast(1)}
   .actor:active .portrait{transform:translateY(-2px) scale(.985)}
   .project:hover .still{
     transform:translateY(-4px);
     box-shadow:
-      inset 0 0 0 1px rgba(78,66,50,.34),
-      0 2px 4px rgba(62,52,38,.14),
-      0 16px 34px rgba(62,52,38,.2);
-    filter:sepia(.14) contrast(1.02);
+      inset 0 0 0 1px rgba(40,42,66,.34),
+      0 2px 4px rgba(24,24,45,.14),
+      0 16px 34px rgba(24,24,45,.2);
+    filter:contrast(1.02);
   }
   .contact-lines a:hover{border-bottom-color:var(--foliage-hi)}
   .contacts-row > a:hover{color:var(--foliage-hi)}
   .messengers a:hover,.rail-nav:hover{background:var(--ink);color:var(--paper-warm)}
-  .poster:hover .pic{transform:translateY(-3px);box-shadow:0 2px 4px rgba(62,52,38,.14),0 12px 26px rgba(62,52,38,.2)}
+  .poster:hover .pic{transform:translateY(-3px);box-shadow:0 2px 4px rgba(24,24,45,.14),0 12px 26px rgba(24,24,45,.2)}
   .foot-bar a:hover{color:var(--foliage-hi)}
 }
 
@@ -827,7 +808,6 @@ footer{
   /* Лист был шириной «экран минус 9rem» — на телефоне это 246px
      из 390, и текст вылезал за край бумаги. */
   .sheet{width:calc(100% - 3rem);margin:1.5rem auto 2rem}
-  .hero-foot{justify-content:flex-start}
   .hero,.about,.contacts{grid-template-columns:1fr}
   .hero{align-items:start}
   /* Страница должна открываться тезисом, а не картинкой:
@@ -839,7 +819,6 @@ footer{
   /* Жёсткие переносы в заголовке рассчитаны на широкий экран —
      на узком они не дают строке перенестись и её обрезает. */
   .hero .display br{display:none}
-  .hero-foot{margin-top:1.6rem}
 }
 @media (max-width:700px){
   .masthead{
@@ -940,12 +919,8 @@ footer{
       <img class="slide" src="photos/daniil-dubinin-1000.webp" alt="" data-id="daniil-dubinin" data-name="Даниил Дубинин" loading="lazy" decoding="async">
       <a class="label who" href="#zolotukhina">Ксения Золотухина</a>
       <div class="vignette"></div>
-      <p class="label plate">Искусство<br>всегда оставляет<br>место надежде</p>
     </div>
 
-    <div class="hero-foot">
-      <p class="label">В каждом человеке есть больше, чем кажется</p>
-    </div>
   </section>
 
   <hr class="rule" style="width:var(--shell);margin:0 auto">
@@ -1411,18 +1386,18 @@ footer{
   var sprigs = [];
   var density = 1;
 
-  var LEAF_YOUNG = [154, 166, 131];   // --foliage-lo
-  var LEAF_RIPE  = [89, 101, 63];     // --foliage-hi
+  var LEAF_YOUNG = [175, 217, 255];
+  var LEAF_RIPE  = [119, 173, 219];
 
   // Приглушённые полевые: ромашка, лютик, незабудка, клевер, фиалка.
   // Насыщенность намеренно низкая: это дальний план, он не должен
   // спорить с фотографиями и текстом на листе.
   var BLOOMS = [
-    { petal:"#EDE7D9", core:"#BCA87C", r:11.0, n:11 },  // ромашка
-    { petal:"#DFD4B2", core:"#B4A277", r:8.0,  n:5  },  // лютик
-    { petal:"#B4BCC4", core:"#98A2AC", r:7.0,  n:5  },  // незабудка
-    { petal:"#C6B2B4", core:"#AB9799", r:9.0,  n:7  },  // клевер
-    { petal:"#B2ABB8", core:"#978FA2", r:8.0,  n:5  }   // фиалка
+    { petal:"#EAF5FF", core:"#AFD9FF", r:11.0, n:11 },
+    { petal:"#C8E5FF", core:"#8EBDE5", r:8.0,  n:5  },
+    { petal:"#AFD9FF", core:"#77ADDB", r:7.0,  n:5  },
+    { petal:"#E9BFDA", core:"#C891AF", r:9.0,  n:7  },
+    { petal:"#C8D0F0", core:"#A7B3DD", r:8.0,  n:5  }
   ];
 
   function rng(seed){
@@ -1609,7 +1584,7 @@ footer{
 
       // Стебель растёт от края внутрь.
       ctx.globalAlpha = 0.5 * Math.min(1, open * 1.6);
-      ctx.strokeStyle = "#7C8068";
+      ctx.strokeStyle = "#AFD9FF";
       ctx.lineWidth = s.w;
       ctx.lineCap = "round";
       ctx.beginPath();
